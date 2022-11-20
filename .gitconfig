@@ -1,0 +1,30 @@
+[user]
+	email = natalia@nataliafonseca.dev
+	name = Natália Fonseca
+	signingkey = ~/.ssh/id_ed25519.pub
+[init]
+	defaultBranch = main
+[core]
+	editor = subl --wait
+	excludesFile = ~/.gitignore
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true
+[push]
+	followTags = true
+	autoSetupRemote = true
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.ssh/allowed_signers
+[alias]
+	c = !git add --all && git commit -m
+	s = !git status -s
+	l = !git log --pretty=format:'%C(yellow)%h%C(red)%d %C(white)%s - %C(cyan)%cn%C(white), %C(green)%cr'
+	r = !git reset --soft
+	revert = !git add . && git reset --hard HEAD
+	amend = !git add --all && git commit --amend --no-edit
+	count = !git shortlog -s --grep
