@@ -36,7 +36,7 @@ function dsh() {
 }
 
 # macos only
-if [ $DEVICE == "macbook" ]; then
+if [[ $DEVICE == "macbook" ]]; then
   alias speedtest="networkQuality"
   alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 fi
