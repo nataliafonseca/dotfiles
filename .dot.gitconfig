@@ -1,0 +1,5 @@
+[alias]
+	c = !git add -u && git commit -m
+	amend = !git add -u && git commit --amend --no-edit
+[user]
+	email = natalia.fonseca@nutrien.com

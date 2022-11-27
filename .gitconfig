@@ -5,7 +5,7 @@
 [init]
 	defaultBranch = main
 [core]
-	editor = subl --wait
+	editor = code --wait
 	excludesFile = ~/.gitignore
 [pull]
 	rebase = true
@@ -28,3 +28,10 @@
 	revert = !git add . && git reset --hard HEAD
 	amend = !git add --all && git commit --amend --no-edit
 	count = !git shortlog -s --grep
+
+[includeIf "gitdir:Nutrien/"]
+	path = ~/.nutrien.gitconfig
+[includeIf "gitdir:Iteris/"]
+	path = ~/.iteris.gitconfig
+[includeIf "gitdir:.dot/"]
+	path = ~/.dot.gitconfig
