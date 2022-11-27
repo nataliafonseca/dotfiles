@@ -6,37 +6,30 @@ function take() {
 }
 
 # git
-alias clone="gh repo clone"
+(( $+commands[gh] )) && alias clone="gh repo clone"
 alias dot="git --git-dir=$HOME/.dot/ --work-tree=$HOME" # dotfiles
 
-function giteris() {
-  git config --local user.name "Natalia Braga da Fonseca - NFO"
-  git config --local user.email natalia.fonseca@iteris.com.br
-}
-
-function gnutrien() {
-  git config --local user.name "Natalia Fonseca"
-  git config --local user.email natalia.fonseca@nutrien.com
-}
-
 # python
+(( $+commands[python] )) || alias python="python3"
 alias py="python"
 alias mkvenv="python -m venv ./.venv"
 alias venv="source ./.venv/bin/activate"
 
-# cat and ls to exa and bat
-which exa >/dev/null 2>&1 && alias ls="exa -lh --icons  --time-style=long-iso --group-directories-first --sort=name --sort=ext"
-which exa >/dev/null 2>&1 && alias la="exa -lha --icons --time-style=long-iso --group-directories-first --sort=name --sort=ext"
-which exa >/dev/null 2>&1 && alias tree="exa --icons --tree"
-which bat >/dev/null 2>&1 && alias cat="bat --style=plain"
+# speedtest
+(( $+commands[networkQuality] )) && alias speedtest="networkQuality" || alias speedtest="python speedtest-cli"
 
-# docker
-function dsh() {
-  docker exec -it $1 sh
-}
+# cat > bat
+(( $+commands[bat] )) && alias cat="bat --style=plain"
 
-# macos only
-if [[ $DEVICE == "macbook" ]]; then
-  alias speedtest="networkQuality"
-  alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
-fi
+# ls > exa
+(( $+commands[exa] )) && alias ls="exa -lh --icons  --time-style=long-iso --group-directories-first --sort=name --sort=ext"
+(( $+commands[exa] )) && alias la="exa -lha --icons --time-style=long-iso --group-directories-first --sort=name --sort=ext"
+(( $+commands[exa] )) && alias tree="exa --icons --tree"
+
+# rm > rmtrash
+# which rmtrash > /dev/null 2>&1 && alias rm="rmtrash"
+(( $+commands[rmtrash] )) && alias rm="rmtrash"
+(( $+commands[rmdirtrash] )) && alias rmdir="rmdirtrash"
+
+# tailscale cli on macbook
+[[ $DEVICE == "macbook" ]] && alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"

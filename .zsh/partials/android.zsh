@@ -1,6 +1,4 @@
-if [ $DEVICE == "macbook" ]; then
-  export ANDROID_HOME=~/Library/Android/Sdk
-fi
+[[ $DEVICE == "macbook" ]] && export ANDROID_HOME=~/Library/Android/Sdk
 
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools

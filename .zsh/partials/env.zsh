@@ -2,6 +2,8 @@ if [[ $(uname) == "Darwin" ]]; then
   export DEVICE=macbook
 elif [[ $(hostnamectl hostname) == "arch" ]]; then
   export DEVICE=arch
+elif [[ $(hostnamectl hostname) == "fedora" ]]; then
+  export DEVICE=fedora
 elif [[ $(hostnamectl hostname) == "homelab" ]]; then
   export DEVICE=homelab
 elif [[ $(hostnamectl hostname) == "cloud" ]]; then

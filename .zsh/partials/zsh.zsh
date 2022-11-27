@@ -1,12 +1,16 @@
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
-unsetopt beep nomatch
+
 bindkey -e
+unsetopt beep nomatch
+setopt autocd
+
 zstyle :compinstall filename $HOME/.zshrc
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
-autoload -Uz compinit
-compinit
+zstyle ':completion:*' menu select
+autoload -Uz compinit && compinit
+
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
