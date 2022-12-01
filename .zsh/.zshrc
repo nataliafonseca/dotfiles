@@ -10,7 +10,7 @@ source $HOME/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/.zsh/plugins/zsh-autoswitch-virtualenv/autoswitch_virtualenv.plugin.zsh
 source $HOME/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
 
-HISTFILE=~/.histfile
+HISTFILE=$HOME/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
@@ -37,24 +37,25 @@ bindkey "^[[3~" delete-char                  # Delete
 # environment, aliases and functions
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:$HOME/.local/bin
-export AUTOSWITCH_VIRTUAL_ENV_DIR=".venv"
+export NOTES_DIR="$HOME/Notebook"
+export QUICK_NOTES_DIR="$NOTES_DIR/Quickies"
+(( $+commands[code] )) && export EDITOR=code
 
 function take() {
   mkdir $1 && cd $1
 }
 
 alias reload="exec $SHELL"
-# alias zshconfig="code $ZDOTDIR"
+alias zshconfig="$EDITOR $ZDOTDIR"
 alias dot="git --git-dir=$HOME/.dot/ --work-tree=$HOME"
 
 (( $+commands[networkQuality] )) && alias speedtest="networkQuality" || alias speedtest="python speedtest-cli"
 (( $+commands[bat] )) && alias cat="bat --style=plain"
-(( $+commands[exa] )) && alias ls="exa -lh --icons  --time-style=long-iso --group-directories-first --sort=name --sort=ext"
-(( $+commands[exa] )) && alias la="exa -lha --icons --time-style=long-iso --group-directories-first --sort=name --sort=ext"
+(( $+commands[exa] )) && alias ls="exa -lh --git --icons  --time-style=long-iso --group-directories-first --sort=name --sort=ext"
+(( $+commands[exa] )) && alias la="exa -lhaa --git --icons --time-style=long-iso --group-directories-first --sort=name --sort=ext"
 (( $+commands[exa] )) && alias tree="exa --icons --tree"
-(( $+commands[rmtrash] )) && alias rm="rmtrash"
-(( $+commands[rmdirtrash] )) && alias rmdir="rmdirtrash"
 (( $+commands[gh] )) && alias clone="gh repo clone"
+(( $+commands[vagrant] )) && alias vagrant="sudo vagrant"
 (( $+commands[python] )) || alias python="python3"
 
 if [[ $(uname) == "Darwin" ]]; then
@@ -73,5 +74,6 @@ elif [[ $(hostnamectl hostname) == "cloud" ]]; then
   export DEVICE=cloud
 fi
 
+source $HOME/.zsh/partials/notes.zsh
 source $HOME/.zsh/partials/nvm.zsh
 source $HOME/.zsh/partials/docker.zsh
