@@ -1,9 +1,2 @@
-node_modules
-venv
-.venv
-.idea
-.DS_Store
-__pycache__
-obj
-bin
-dist
+.antidote
+.zsh_plugins.zsh

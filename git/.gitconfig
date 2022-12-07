@@ -6,7 +6,7 @@
 	defaultBranch = main
 [core]
 	editor = code --wait
-	excludesFile = ~/.gitignore
+	excludesFile = ~/.config/git/.gitignore
 [pull]
 	rebase = true
 [rebase]
@@ -30,8 +30,8 @@
 	count = !git shortlog -s --grep
 
 [includeIf "gitdir:Nutrien/"]
-	path = ~/.nutrien.gitconfig
+	path = ~/.config/git/.nutrien.gitconfig
 [includeIf "gitdir:Iteris/"]
-	path = ~/.iteris.gitconfig
+	path = ~/.config/git/.iteris.gitconfig
 [includeIf "gitdir:.dot/"]
-	path = ~/.dot.gitconfig
+	path = ~/.config/git/.dot.gitconfig

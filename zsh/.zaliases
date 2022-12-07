@@ -1,0 +1,13 @@
+alias reload='exec $SHELL'
+alias zshconfig="$EDITOR $ZDOTDIR"
+alias dot="git --git-dir=$HOME/.config/dotgit/ --work-tree=$HOME"
+alias clone="gh repo clone"
+
+# use exa instead of ls if exa is installed
+(( $+commands[exa] )) && alias ls="exa -lh --git --icons  --time-style=long-iso --group-directories-first --sort=name --sort=ext"
+(( $+commands[exa] )) && alias la="exa -lhaa --git --icons --time-style=long-iso --group-directories-first --sort=name --sort=ext"
+(( $+commands[exa] )) && alias tree="exa --icons --tree"
+
+# use bat instead of cat if bat is installed
+(( $+commands[bat] )) && alias cat="bat --style=plain"
+
