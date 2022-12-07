@@ -18,6 +18,8 @@ $ZDOTDIR/plugins/speedtest
 $ZDOTDIR/plugins/compose
 $ZDOTDIR/plugins/nvm
 $ZDOTDIR/plugins/tailscale
+$ZDOTDIR/plugins/android conditional:is_thinkpad
+$ZDOTDIR/plugins/openvpn conditional:is_thinkpad
 
 $ZDOTDIR/plugins/openrgb conditional:is_pc 
 $ZDOTDIR/plugins/homebrew conditional:is_mac
