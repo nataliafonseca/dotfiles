@@ -5,7 +5,6 @@ mattmc3/zephyr path:plugins/environment
 mattmc3/zephyr path:plugins/editor
 mattmc3/zephyr path:plugins/history
 mattmc3/zephyr path:plugins/utility
-mattmc3/zephyr path:plugins/zfunctions
 rupa/z
 
 # powerlevel10k - zsh theme
@@ -13,12 +12,16 @@ romkatv/powerlevel10k
 $ZDOTDIR/plugins/p10k
 
 # local plugins
+$ZDOTDIR/plugins/environment
 $ZDOTDIR/plugins/python
+$ZDOTDIR/plugins/speedtest
+$ZDOTDIR/plugins/compose
 $ZDOTDIR/plugins/nvm
+$ZDOTDIR/plugins/openvpn
 
-# device specific
+$ZDOTDIR/plugins/homebrew conditional:is_macbook
 $ZDOTDIR/plugins/openrgb conditional:is_pc 
-$ZDOTDIR/plugins/obsidian conditional:is_mac conditional:is_pc
+$ZDOTDIR/plugins/obsidian conditional:is_macbook conditional:is_pc
 
 ### ^^^ ###
 mattmc3/zephyr path:plugins/completions

@@ -6,7 +6,7 @@
 	defaultBranch = main
 [core]
 	editor = code --wait
-	excludesFile = ~/.config/git/.gitignore
+	excludesFile = ~/.dot/git/.gitignore
 [pull]
 	rebase = true
 [rebase]
@@ -33,5 +33,3 @@
 	path = ~/.config/git/.nutrien.gitconfig
 [includeIf "gitdir:Iteris/"]
 	path = ~/.config/git/.iteris.gitconfig
-[includeIf "gitdir:.dot/"]
-	path = ~/.config/git/.dot.gitconfig

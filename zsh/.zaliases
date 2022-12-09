@@ -1,7 +1,8 @@
 alias reload='exec $SHELL'
-alias zshconfig="$EDITOR $ZDOTDIR"
-alias dot="git --git-dir=$HOME/.config/dotgit/ --work-tree=$HOME"
-alias clone="gh repo clone"
+alias dotconfig="$EDITOR $DOTDIR"
+
+(( $+commands[gh] )) && alias clone="gh repo clone"
+(( $+commands[vagrant] )) && alias vagrant="sudo vagrant"
 
 # use exa instead of ls if exa is installed
 (( $+commands[exa] )) && alias ls="exa -lh --git --icons  --time-style=long-iso --group-directories-first --sort=name --sort=ext"

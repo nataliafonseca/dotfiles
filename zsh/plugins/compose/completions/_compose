@@ -1,0 +1,7 @@
+#compdef compose
+
+_compose_completion() {
+  eval $(env _TYPER_COMPLETE_ARGS="${words[1,$CURRENT]}" _COMPOSE_COMPLETE=complete_zsh compose)
+}
+
+compdef _compose_completion compose
