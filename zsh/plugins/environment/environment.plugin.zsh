@@ -3,7 +3,7 @@
 [[ ! -z $XDG_DATA_HOME ]] && ([[ -d $XDG_DATA_HOME ]] || mkdir -p $XDG_DATA_HOME)
 [[ ! -z $XDG_RUNTIME_DIR ]] && ([[ -d $XDG_RUNTIME_DIR ]] || mkdir -p $XDG_RUNTIME_DIR)
 
-if [[ is_macbook ]]; then
+if [[ is_mac ]]; then
   [[ ! -z $XDG_DESKTOP_DIR ]] && ([[ -d $XDG_DESKTOP_DIR ]] || mkdir -p $XDG_DESKTOP_DIR)
   [[ ! -z $XDG_DOCUMENTS_DIR ]] && ([[ -d $XDG_DOCUMENTS_DIR ]] || mkdir -p $XDG_DOCUMENTS_DIR)
   [[ ! -z $XDG_DOWNLOAD_DIR ]] && ([[ -d $XDG_DOWNLOAD_DIR ]] || mkdir -p $XDG_DOWNLOAD_DIR)
