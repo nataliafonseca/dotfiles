@@ -12,3 +12,5 @@ if [[ is_macbook ]]; then
   [[ ! -z $XDG_VIDEOS_DIR ]] && ([[ -d $XDG_VIDEOS_DIR ]] || mkdir -p $XDG_VIDEOS_DIR)
   [[ ! -z $XDG_PROJECTS_DIR ]] && ([[ -d $XDG_PROJECTS_DIR ]] || mkdir -p $XDG_PROJECTS_DIR)
 fi
+
+setopt autocd

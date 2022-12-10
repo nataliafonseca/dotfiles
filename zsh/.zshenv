@@ -11,7 +11,7 @@ export PATH=$PATH:$HOME/.local/bin
 export QT_IM_MODULE=ibus
 export XCOMPOSEFILE=$DOTDIR/.XCompose
 
-(( $+commands[code] )) && export EDITOR=code
+(( $+commands[code] )) && export EDITOR=code || export EDITOR=vim
 
 function is_macbook() { [[ $(uname) == "Darwin" ]] && return 0 || return 1 }
 function is_pc() { [[ $(hostnamectl hostname) == "pc-linux" ]] && return 0 || return 1 }

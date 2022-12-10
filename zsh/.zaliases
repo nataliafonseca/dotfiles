@@ -1,14 +1,31 @@
 alias reload='exec $SHELL'
 alias dotconfig="$EDITOR $DOTDIR"
 
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias -g ......='../../../../..'
+
 (( $+commands[gh] )) && alias clone="gh repo clone"
 (( $+commands[vagrant] )) && alias vagrant="sudo vagrant"
 
-# use exa instead of ls if exa is installed
+# ls and exa
+alias la='ls -laa'
+alias ldot='ls -ld .*'
 (( $+commands[exa] )) && alias ls="exa -lh --git --icons  --time-style=long-iso --group-directories-first --sort=name --sort=ext"
-(( $+commands[exa] )) && alias la="exa -lhaa --git --icons --time-style=long-iso --group-directories-first --sort=name --sort=ext"
 (( $+commands[exa] )) && alias tree="exa --icons --tree"
 
 # use bat instead of cat if bat is installed
 (( $+commands[bat] )) && alias cat="bat --style=plain"
 
+# fix typos
+alias quit='exit'
+alias cd..='cd ..'
+
+# tar
+alias tarls="tar -tvf"
+alias untar="tar -xf"
+
+# date/time
+alias timestamp="date '+%Y-%m-%d %H:%M:%S'"
+alias datestamp="date '+%Y-%m-%d'"
