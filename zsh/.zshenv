@@ -14,6 +14,7 @@ export XCOMPOSEFILE=$DOTDIR/.XCompose
 (( $+commands[code] )) && export EDITOR=code || export EDITOR=vim
 
 function is_macbook() { [[ $(uname) == "Darwin" ]] && return 0 || return 1 }
-function is_pc() { [[ $(hostnamectl hostname) == "pc-linux" ]] && return 0 || return 1 }
-function is_homelab() { [[ $(hostnamectl hostname) == "homelab" ]] && return 0 || return 1 }
-function is_cloud() { [[ $(hostnamectl hostname) == "cloud" ]] && return 0 || return 1 }
+function is_pc() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"pc-linux"* ]] && return 0 || return 1 }
+function is_homelab() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"homelab"* ]] && return 0 || return 1 }
+function is_cloud() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"cloud"* ]] && return 0 || return 1 }
+function is_work() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"INOTE"* ]] && return 0 || return 1 }
