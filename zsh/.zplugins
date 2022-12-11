@@ -26,3 +26,4 @@ $ZDOTDIR/plugins/obsidian conditional:is_mac conditional:is_pc
 ### ^^^ ###
 mattmc3/zephyr path:plugins/completions
 mattmc3/zephyr path:plugins/history-substring-search
+mattmc3/zephyr path:plugins/syntax-highlighting
