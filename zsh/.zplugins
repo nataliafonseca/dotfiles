@@ -14,14 +14,18 @@ $ZDOTDIR/plugins/p10k
 # local plugins
 $ZDOTDIR/plugins/environment
 $ZDOTDIR/plugins/python
+$ZDOTDIR/plugins/docker
 $ZDOTDIR/plugins/speedtest
 $ZDOTDIR/plugins/compose
 $ZDOTDIR/plugins/nvm
-$ZDOTDIR/plugins/openvpn
+$ZDOTDIR/plugins/tailscale
 
-$ZDOTDIR/plugins/homebrew conditional:is_mac
 $ZDOTDIR/plugins/openrgb conditional:is_pc 
+$ZDOTDIR/plugins/homebrew conditional:is_mac
+$ZDOTDIR/plugins/android conditional:is_mac conditional:is_thinkpad
 $ZDOTDIR/plugins/obsidian conditional:is_mac conditional:is_pc
+$ZDOTDIR/plugins/caddy conditional:is_homelab conditional:is_pc
+$ZDOTDIR/plugins/openvpn conditional:is_thinkpad conditional:is_mac conditional:is_pc
 
 ### ^^^ ###
 mattmc3/zephyr path:plugins/completions
