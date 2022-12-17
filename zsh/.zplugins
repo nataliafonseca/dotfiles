@@ -22,10 +22,18 @@ $ZDOTDIR/plugins/tailscale
 
 $ZDOTDIR/plugins/openrgb conditional:is_pc 
 $ZDOTDIR/plugins/homebrew conditional:is_mac
-$ZDOTDIR/plugins/android conditional:is_mac conditional:is_thinkpad
-$ZDOTDIR/plugins/obsidian conditional:is_mac conditional:is_pc
-$ZDOTDIR/plugins/caddy conditional:is_homelab conditional:is_pc
-$ZDOTDIR/plugins/openvpn conditional:is_thinkpad conditional:is_mac conditional:is_pc
+
+$ZDOTDIR/plugins/android conditional:is_mac 
+$ZDOTDIR/plugins/android conditional:is_thinkpad
+
+$ZDOTDIR/plugins/obsidian conditional:is_mac
+$ZDOTDIR/plugins/obsidian conditional:is_pc
+
+$ZDOTDIR/plugins/caddy conditional:is_homelab
+
+$ZDOTDIR/plugins/openvpn conditional:is_thinkpad 
+$ZDOTDIR/plugins/openvpn conditional:is_mac 
+$ZDOTDIR/plugins/openvpn conditional:is_pc
 
 ### ^^^ ###
 mattmc3/zephyr path:plugins/completions
