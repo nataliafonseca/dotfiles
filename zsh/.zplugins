@@ -12,7 +12,6 @@ romkatv/powerlevel10k
 $ZDOTDIR/plugins/p10k
 
 # local plugins
-$ZDOTDIR/plugins/environment
 $ZDOTDIR/plugins/python
 $ZDOTDIR/plugins/docker
 $ZDOTDIR/plugins/speedtest
@@ -22,6 +21,7 @@ $ZDOTDIR/plugins/tailscale
 
 $ZDOTDIR/plugins/openrgb conditional:is_pc 
 $ZDOTDIR/plugins/homebrew conditional:is_mac
+$ZDOTDIR/plugins/bun conditional:is_mac
 
 $ZDOTDIR/plugins/android conditional:is_mac 
 $ZDOTDIR/plugins/android conditional:is_thinkpad
