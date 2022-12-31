@@ -3,6 +3,10 @@ if [[ -r "$XDG_CACHE_HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "$XDG_CACHE_HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# load functions
+autoload -Uz $ZDOTDIR/functions/autoload-dir
+autoload-dir $ZDOTDIR/functions
+
 # load antidote/plugins
 zstyle ':antidote:bundle' use-friendly-names 'yes'
 zstyle ':antidote:bundle' file $ZDOTDIR/.zplugins
@@ -18,10 +22,6 @@ fi
 
 source $ZDOTDIR/.zplugins.zsh
 autoload -Uz $ZDOTDIR/.antidote/functions/antidote
-
-# load functions
-autoload -Uz $ZDOTDIR/functions/autoload-dir
-autoload-dir $ZDOTDIR/functions
 
 # load aliases
 source $ZDOTDIR/.zaliases
