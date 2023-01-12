@@ -2,6 +2,8 @@
 autoload-dir ${0:A:h}/functions
 fpath+=(${0:A:h}/functions)
 
+PATH=$(pyenv root)/shims:$PATH
+
 export WORKON_HOME="$XDG_DATA_HOME/venvs"
 [[ -d "$WORKON_HOME" ]] || mkdir -p "$WORKON_HOME"
 
