@@ -109,7 +109,8 @@ Add colima-start to login items
 ## Python
 
 ```sh
-brew install pyenv pipx
+brew install pipx
+curl https://pyenv.run | bash
 pyenv install 2
 pyenv install 3
 pyenv global 3 2
