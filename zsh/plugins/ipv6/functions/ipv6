@@ -1,0 +1,37 @@
+#!/usr/bin/env zsh
+
+function ipv6_on() {
+  if [[ is_mac ]]; then
+    SERVICES=("${(@f)$(networksetup -listallnetworkservices)}")
+    SERVICES=("${SERVICES[@]:1}")
+
+    foreach service in $SERVICES 
+      networksetup -setv6automatic $service
+    end
+  else
+    sudo sysctl -w net.ipv6.conf.all.disable_ipv6=0 > /dev/null
+  fi
+}
+
+function ipv6_off() {
+  if [[ is_mac ]]; then
+    SERVICES=("${(@f)$(networksetup -listallnetworkservices)}")
+    SERVICES=("${SERVICES[@]:1}")
+
+    foreach service in $SERVICES 
+      networksetup -setv6off $service
+    end
+  else
+    sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1 > /dev/null
+  fi
+}
+
+while (( $# )); do
+  case $1 in
+    on|--on) ipv6_on && return;;
+    off|--off) ipv6_off && return;;
+  esac
+  shift
+done
+
+osascript -e "tell application \"/Applications/AWS VPN Client/AWS VPN Client.app\"" -e "connect \"Nutrien Digital\"" -e "end tell"
