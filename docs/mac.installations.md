@@ -104,7 +104,7 @@ ln -sfn /opt/homebrew/opt/docker-compose/bin/docker-compose ~/.docker/cli-plugin
 colima start
 ```
 
-Add colima-start to login startup apps
+Add colima-start to login items
 
 ## Python
 
@@ -115,6 +115,7 @@ pyenv install 3
 pyenv global 3 2
 pipx ensurepath
 curl -sSL https://install.python-poetry.org | python3 -
+poetry config virtualenvs.in-project true
 ```
 
 ## Java
@@ -124,11 +125,50 @@ brew install openjdk@17
 sudo ln -sfn $(brew --prefix)/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
 ```
 
+## Development packages and tools
+
+```sh
+brew install cocoapods
+brew install watchman
+brew install wget
+brew install imagemagick
+brew install graphicsmagick
+brew install --cask beekeeper-studio
+brew install --cask postman
+brew install --cask insomnia
+```
+
+XCode initialization:
+
+```sh
+sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+sudo xcodebuild -runFirstLaunch
+```
+
+## Work
+
+```sh
+brew install --cask microsoft-teams
+brew install --cask slack
+brew install --cask keybase
+```
+
 ## Homebrew Apps
 
 ```sh
-brew install --cask microsoft-teams slack keybase syncthing obsidian bartender beekeeper-studio cleanshot discord iina imageoptim insomnia kawa notion postman qbittorrent telegram
-brew install cocoapods watchman wget imagemagick graphicsmagick
+brew install --cask sanesidebuttons
+brew install --cask obsidian
+brew install --cask bartender
+brew install --cask cleanshot
+brew install --cask discord
+brew install --cask iina
+brew install --cask imageoptim
+brew install --cask kawa
+brew install --cask notion
+brew install --cask qbittorrent
+brew install --cask telegram
+brew install --cask google-chrome
+brew install --cask sublime-text
 ```
 
 ## AppStore Apps
@@ -156,3 +196,5 @@ To repeat keypresses, but disables special keys on hold:
 ```sh
 defaults write -g ApplePressAndHoldEnabled -bool false
 ```
+
+Epson Printer: https://epson.com.br/Suporte/Impressoras/Impressoras-multifuncionais/Epson-L/Epson-L395/s/SPT_C11CF46301?review-filter=macOS+12.x
