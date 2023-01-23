@@ -20,9 +20,9 @@ $ZDOTDIR/plugins/docker
 $ZDOTDIR/plugins/speedtest
 $ZDOTDIR/plugins/compose
 $ZDOTDIR/plugins/nvm
-$ZDOTDIR/plugins/tailscale
 $ZDOTDIR/plugins/ipv6
 
+$ZDOTDIR/plugins/tailscale conditional:is_mac
 $ZDOTDIR/plugins/openrgb conditional:is_pc
 
 $ZDOTDIR/plugins/android conditional:is_mac
