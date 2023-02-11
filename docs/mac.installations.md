@@ -122,8 +122,8 @@ poetry config virtualenvs.in-project true
 ## Java
 
 ```sh
-brew install openjdk@17
-sudo ln -sfn $(brew --prefix)/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
+brew install openjdk@11
+sudo ln -sfn $(brew --prefix)/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
 ```
 
 ## Development packages and tools

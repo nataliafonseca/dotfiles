@@ -31,6 +31,6 @@
 
 
 [includeIf "gitdir:Nutrien/"]
-	path = ~/.config/git/.nutrien.gitconfig
+	path = ~/.dot/git/.nutrien.gitconfig
 [includeIf "gitdir:Iteris/"]
-	path = ~/.config/git/.iteris.gitconfig
+	path = ~/.dot/git/.iteris.gitconfig
