@@ -1,4 +1,4 @@
-[[ is_mac ]] && 
+is_mac && 
 export ANDROID_HOME=~/Library/Android/Sdk || 
 export ANDROID_HOME=~/.config/Android/Sdk
 

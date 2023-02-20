@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 function ipv6_on() {
-  if [[ is_mac ]]; then
+  if is_mac; then
     SERVICES=("${(@f)$(networksetup -listallnetworkservices)}")
     SERVICES=("${SERVICES[@]:1}")
 
@@ -9,12 +9,12 @@ function ipv6_on() {
       networksetup -setv6automatic $service
     end
   else
-    sudo sysctl -w net.ipv6.conf.all.disable_ipv6=0 > /dev/null
+    sudo sysctl -w net.ipv6.conf.all.disable_ipv6=0
   fi
 }
 
 function ipv6_off() {
-  if [[ is_mac ]]; then
+  if is_mac; then
     SERVICES=("${(@f)$(networksetup -listallnetworkservices)}")
     SERVICES=("${SERVICES[@]:1}")
 
@@ -22,7 +22,7 @@ function ipv6_off() {
       networksetup -setv6off $service
     end
   else
-    sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1 > /dev/null
+    sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
   fi
 }
 

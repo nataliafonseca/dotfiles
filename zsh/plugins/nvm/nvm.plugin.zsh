@@ -1,5 +1,5 @@
 # if variable NVM_DIR is not set, sets for ~/.config/nvm
-[ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/.config/nvm"
+[ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/.nvm"
 
 # if NVM_DIR is not present, create directory
 [ -d "$NVM_DIR" ] || mkdir -p $NVM_DIR

@@ -21,8 +21,8 @@ $ZDOTDIR/plugins/speedtest
 $ZDOTDIR/plugins/compose
 $ZDOTDIR/plugins/nvm
 $ZDOTDIR/plugins/ipv6
+$ZDOTDIR/plugins/tailscale
 
-$ZDOTDIR/plugins/tailscale conditional:is_mac
 $ZDOTDIR/plugins/openrgb conditional:is_pc
 
 $ZDOTDIR/plugins/android conditional:is_mac
@@ -32,6 +32,6 @@ $ZDOTDIR/plugins/obsidian conditional:is_mac
 $ZDOTDIR/plugins/obsidian conditional:is_pc
 
 ### ^^^ ###
-mattmc3/zephyr path:plugins/completion
+mattmc3/zephyr path:plugins/completions
 mattmc3/zephyr path:plugins/history-substring-search
 mattmc3/zephyr path:plugins/syntax-highlighting
