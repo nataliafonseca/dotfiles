@@ -23,6 +23,7 @@
 	s = !git status -s
 	l = !git log --pretty=format:'%C(yellow)%h%C(red)%d %C(white)%s - %C(cyan)%cn%C(white), %C(green)%cr'
 	r = !git reset --soft
+	empty = !git commit --allow-empty -m
 	amend = !git add --all && git commit --amend --no-edit
 	count = !git shortlog -s --grep
 	resync = !git fetch origin && git reset --soft
