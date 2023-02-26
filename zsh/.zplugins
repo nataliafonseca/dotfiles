@@ -10,11 +10,11 @@ mattmc3/zephyr path:plugins/history
 mattmc3/zephyr path:plugins/utility
 rupa/z
 
-# powerlevel10k - zsh theme
+# # powerlevel10k - zsh theme
 romkatv/powerlevel10k
 $ZDOTDIR/plugins/p10k
 
-# local plugins
+# # local plugins
 $ZDOTDIR/plugins/python
 $ZDOTDIR/plugins/docker
 $ZDOTDIR/plugins/speedtest
@@ -31,7 +31,7 @@ $ZDOTDIR/plugins/android conditional:is_thinkpad
 $ZDOTDIR/plugins/obsidian conditional:is_mac
 $ZDOTDIR/plugins/obsidian conditional:is_pc
 
-### ^^^ ###
-mattmc3/zephyr path:plugins/completions
+# ### ^^^ ###
+mattmc3/zephyr path:plugins/completion
 mattmc3/zephyr path:plugins/history-substring-search
 mattmc3/zephyr path:plugins/syntax-highlighting
