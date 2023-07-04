@@ -3,7 +3,7 @@ if [[ -r "$XDG_CACHE_HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "$XDG_CACHE_HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Set Zsh history variables. We don't trust other methods.
+# set zsh history variables.
 HISTFILE=$XDG_DATA_HOME/zsh/history
 [[ -d $HISTFILE:h ]] || mkdir -p $HISTFILE:h
 HISTSIZE=10000   # max history in session
@@ -17,14 +17,18 @@ autoload-dir $ZDOTDIR/functions
 zstyle ':antidote:bundle' use-friendly-names 'yes'
 zstyle ':antidote:bundle' file $ZDOTDIR/.zplugins
 
+# clone antidot if not found
 [[ -e $ZDOTDIR/.antidote ]] || git clone --depth=1 https://github.com/mattmc3/antidote.git $ZDOTDIR/.antidote
 
+# create plugin files if not found
 zsh_plugins=${ZDOTDIR:-~}/.zplugins.zsh
 [[ -f ${zsh_plugins:r} ]] || touch ${zsh_plugins:r}
 
+# load functions
 fpath+=($ZDOTDIR/.antidote/functions)
 autoload -Uz $fpath[-1]/antidote
 
+# update plugins file if text file changes
 if [[ ! $zsh_plugins -nt ${zsh_plugins:r} ]] || [[ ! -s $zsh_plugins ]]; then
 
   (( $+commands[envsubst] )) || envsubst() { python3 -c 'import os,sys;[sys.stdout.write(os.path.expandvars(l)) for l in sys.stdin]' }
@@ -33,11 +37,13 @@ if [[ ! $zsh_plugins -nt ${zsh_plugins:r} ]] || [[ ! -s $zsh_plugins ]]; then
   (envsubst <${zsh_plugins:r} | antidote bundle >|$zsh_plugins)
 fi
 
+# load plugins
 source $zsh_plugins
 
 # load aliases
 source $ZDOTDIR/.zaliases
 
+####
 function gifconvert() {
     ffmpeg -y -i "$1" -vf palettegen _tmp_palette.png
     ffmpeg -y -i "$1" -i _tmp_palette.png -filter_complex paletteuse -r 10  "${1%.webm}.gif"
