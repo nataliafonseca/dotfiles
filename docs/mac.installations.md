@@ -14,7 +14,7 @@ sudo softwareupdate --install-rosetta
 ## Initial programs to make the macbook usable
 
 ```sh
-brew install --cask scroll-reverser rectangle firefox visual-studio-code 1password 1password-cli snipaste raycast
+brew install --cask scroll-reverser rectangle iterm2 firefox 1password 1password-cli
 ```
 
 ## SSH configuration
@@ -72,13 +72,11 @@ exec zsh
 
 ```sh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-nvm install 'lts/\*'
-corepack enable
 nvm install node
 corepack enable
-nvm install 14
+nvm install 'lts/*'
 corepack enable
-nvm alias default 'lts/\*'
+nvm alias default 'lts/*'
 ```
 
 ## Fonts
@@ -86,13 +84,6 @@ nvm alias default 'lts/\*'
 ```sh
 brew tap homebrew/cask-fonts
 brew install font-blex-mono-nerd-font font-jetbrains-mono-nerd-font
-```
-
-## iTerm2
-
-```sh
-brew tap homebrew/cask-versions
-brew install iterm2-beta
 ```
 
 ## Docker
@@ -122,80 +113,71 @@ poetry config virtualenvs.in-project true
 ## Java
 
 ```sh
-brew install openjdk@11
-sudo ln -sfn $(brew --prefix)/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
+brew install openjdk
+sudo ln -sfn $(brew --prefix)/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
 ```
 
-## Development packages and tools
+## Apps - Homebrew
 
 ```sh
-brew install cocoapods
-brew install watchman
-brew install wget
-brew install imagemagick
-brew install graphicsmagick
-brew install --cask beekeeper-studio
-brew install --cask postman
-brew install --cask insomnia
-```
-
-XCode initialization:
-
-```sh
-sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
-sudo xcodebuild -runFirstLaunch
-```
-
-## Work
-
-```sh
-brew install --cask microsoft-teams
-brew install --cask slack
-brew install --cask keybase
-```
-
-## Homebrew Apps
-
-```sh
-brew install --cask sanesidebuttons
-brew install --cask obsidian
-brew install --cask bartender
-brew install --cask cleanshot
-brew install --cask discord
-brew install --cask iina
-brew install --cask imageoptim
-brew install --cask kawa
-brew install --cask notion
-brew install --cask qbittorrent
-brew install --cask telegram
-brew install --cask google-chrome
-brew install --cask sublime-text
+brew install cocoapods watchman wget imagemagick graphicsmagick mas
+brew install --cask beekeeper-studio insomnia obsidian bartender cleanshot discord iina imageoptim notion qbittorrent telegram google-chrome sublime-text alt-tab
 ```
 
 ## AppStore Apps
 
-```sh
-brew install mas
-mas install 1176895641 # Spark
-mas install 1278508951 # Trello
-mas install 824171161 # Affinity Designer
-mas install 824183456 # Affinity Photo
-mas install 1528890965 # TextSniper
-mas install 411643860 # DaisyDisk
-mas install 457622435 # Yoink
-mas install 462054704 # Word
-mas install 462058435 # Excel
-mas install 462062816 # PowerPoint
-mas install 414030210 # LimeChat
-mas install 425424353 # The Unarchiver
-```
+Whatsapp Desktop
+Affinity Designer
+Affinity Photo
+TextSniper
+DaisyDisk
+Yoink
+Word
+Excel
+PowerPoint
+Pixelmator Pro
+LanguageTool
+Presentify
+The Unarchiver
+LimeChat
+NordVPN
 
 # Configs and instructions
 
-To repeat keypresses, but disables special keys on hold:
+## Keyboard
+
+To repeat keypresses (but disables special keys on hold):
 
 ```sh
 defaults write -g ApplePressAndHoldEnabled -bool false
 ```
 
-Epson Printer: https://epson.com.br/Suporte/Impressoras/Impressoras-multifuncionais/Epson-L/Epson-L395/s/SPT_C11CF46301?review-filter=macOS+12.x
+Swap `cmd` and `ctrl`:
+```plain
+System settings -> Keyboard -> Keyboard Shortcuts -> Modifier Keys -> (Select keyboard on top) -> ctrl > cmd / cmd > ctrl
+```
+
+Use default Function Keys:
+```plain
+System settings -> Keyboard -> Keyboard Shortcuts -> Function Keys -> Use F1, F2, etc. keys as standard function keys
+```
+
+### EURKey
+
+sudo npx degit sonicdoe/EurKEY/EurKEY.bundle '/Library/Keyboard Layouts/EurKEY.bundle'
+
+## Epson L395 Printer
+
+https://epson.com.br/Suporte/Impressoras/Impressoras-multifuncionais/Epson-L/Epson-L395/s/SPT_C11CF46301?review-filter=macOS+13.x
+
+## Firefox
+
+```sh
+cd /Users/natalia/Library/Application\ Support/Firefox/Profiles/*.default-release \
+&& mkdir ./chrome \
+&& curl https://gist.githubusercontent.com/nataliafonseca/576392293f3bc34dd125013a1b5f6dca/raw/0c670187f343bf3cc2e151a5eaa286dc2a109c0e/user.js -o ./user.js \
+&& curl https://gist.githubusercontent.com/nataliafonseca/576392293f3bc34dd125013a1b5f6dca/raw/0c670187f343bf3cc2e151a5eaa286dc2a109c0e/userChrome.css -o ./chrome/userChrome.css \
+&& curl https://gist.githubusercontent.com/nataliafonseca/576392293f3bc34dd125013a1b5f6dca/raw/0c670187f343bf3cc2e151a5eaa286dc2a109c0e/userContent.css -o ./chrome/userContent.css
+```
+
+In `about:config` enable `use autoscrolling`.
