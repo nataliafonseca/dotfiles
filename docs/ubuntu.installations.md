@@ -31,8 +31,8 @@ sudo apt-get update && \
 sudo apt-get install sublime-text
 
 ## docker
-curl -fsSL https://get.docker.com | bash
-sudo groupadd docker
-sudo usermod -aG docker $USER
-newgrp docker
-docker run hello-world
+curl -fsSL https://get.docker.com | bash  
+sudo groupadd docker  
+sudo usermod -aG docker $USER  
+newgrp docker  
+docker run hello-world  
