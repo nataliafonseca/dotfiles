@@ -13,8 +13,8 @@ alias -g ......='../../../../..'
 # ls and exa
 alias la='ls -laa'
 alias ldot='ls -ld .*'
-(( $+commands[exa] )) && alias ls="exa -lh --icons  --time-style=long-iso --group-directories-first --sort=name --sort=ext"
-(( $+commands[exa] )) && alias tree="exa --icons --tree"
+(( $+commands[eza] )) && alias ls="eza -lh --icons  --time-style=long-iso --group-directories-first --sort=name --sort=ext"
+(( $+commands[eza] )) && alias tree="eza --icons --tree"
 
 # use bat instead of cat if bat is installed
 (( $+commands[bat] )) && alias cat="bat --style=plain"

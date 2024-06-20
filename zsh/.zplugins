@@ -2,17 +2,17 @@ $ZDOTDIR/plugins/homebrew conditional:is_mac
 
 ### ^^^
 
-$ZDOTDIR/plugins/python
+# $ZDOTDIR/plugins/python
 $ZDOTDIR/plugins/docker
 $ZDOTDIR/plugins/nvm
 $ZDOTDIR/plugins/speedtest
 
 romkatv/powerlevel10k
 $ZDOTDIR/plugins/p10k
-rupa/z
 
 ### ^^^
 mattmc3/zephyr path:plugins/completion
+ajeetdsouza/zoxide
 zsh-users/zsh-autosuggestions
 zdharma-continuum/fast-syntax-highlighting
 zsh-users/zsh-history-substring-search
