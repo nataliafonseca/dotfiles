@@ -1,3 +1,6 @@
 .antidote
 .zplugins.zsh
 .zsh_sessions
+.env
+.zcompdump
+.zsh_history

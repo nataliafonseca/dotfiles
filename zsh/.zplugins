@@ -6,11 +6,16 @@ $ZDOTDIR/plugins/homebrew conditional:is_mac
 $ZDOTDIR/plugins/docker
 $ZDOTDIR/plugins/nvm
 $ZDOTDIR/plugins/speedtest
+$ZDOTDIR/plugins/bun
+$ZDOTDIR/plugins/go
+$ZDOTDIR/plugins/direnv
+$ZDOTDIR/plugins/claude
 
 romkatv/powerlevel10k
 $ZDOTDIR/plugins/p10k
 
 ### ^^^
+
 mattmc3/zephyr path:plugins/completion
 ajeetdsouza/zoxide
 zsh-users/zsh-autosuggestions

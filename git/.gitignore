@@ -8,5 +8,4 @@ obj
 bin
 dist
 .env*
-!.env.example
-.vscode
+!.env*.example
