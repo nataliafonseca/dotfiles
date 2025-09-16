@@ -1,16 +1,15 @@
 # ~/.zshenv should only be a one-liner that sources this file
 # echo ". ~/.dot/zsh/.zshenv" > ~/.zshenv
 
-function is_mac() { [[ $uname == "Darwin" ]] && return 0 || return 1 }
-function is_pc() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"pc"* ]] && return 0 || return 1 }
-function is_homelab() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"homelab"* ]] && return 0 || return 1 }
-function is_cloud() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"cloud"* ]] && return 0 || return 1 }
+function is_mac() { [[ "$OSTYPE" == "darwin"* ]] }
+function is_pc() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"pc"* ]] }
+function is_homelab() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"homelab"* ]] }
+function is_cloud() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"cloud"* ]] }
 
-function is_deb() { (( $+commands[apt] )) && return 0 || return 1 }
-function is_arch() { (( $+commands[pacman] )) && return 0 || return 1 }
-function is_fedora() { (( $+commands[dnf] )) && return 0 || return 1 }
-function is_wayland() { [[ $XDG_SESSION_TYPE == "wayland" ]] && return 0 || return 1 }
-
+function is_deb() { (( $+commands[apt] )) }
+function is_arch() { (( $+commands[pacman] )) }
+function is_fedora() { (( $+commands[dnf] )) }
+function is_wayland() { [[ $XDG_SESSION_TYPE == "wayland" ]] }
 
 export DOTDIR=~/.dot
 export ZDOTDIR=$DOTDIR/zsh
