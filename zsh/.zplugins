@@ -17,7 +17,7 @@ $ZDOTDIR/plugins/p10k
 ### ^^^
 
 mattmc3/zephyr path:plugins/completion
-ajeetdsouza/zoxide
+$ZDOTDIR/plugins/zoxide
 zsh-users/zsh-autosuggestions
 zdharma-continuum/fast-syntax-highlighting
 zsh-users/zsh-history-substring-search

@@ -15,7 +15,9 @@ export DOTDIR=~/.dot
 export ZDOTDIR=$DOTDIR/zsh
 export GIT_CONFIG_GLOBAL=$DOTDIR/git/.gitconfig
 
-source $DOTDIR/.env
+if [ -f $DOTDIR/.env ]; then
+  source $DOTDIR/.env
+fi
 
 # Set XDG base dirs.
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
