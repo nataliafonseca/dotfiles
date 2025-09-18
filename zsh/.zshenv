@@ -1,16 +1,6 @@
 # ~/.zshenv should only be a one-liner that sources this file
 # echo ". ~/.dot/zsh/.zshenv" > ~/.zshenv
 
-function is_mac() { [[ "$OSTYPE" == "darwin"* ]] }
-function is_pc() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"pc"* ]] }
-function is_homelab() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"homelab"* ]] }
-function is_cloud() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"cloud"* ]] }
-
-function is_deb() { (( $+commands[apt] )) }
-function is_arch() { (( $+commands[pacman] )) }
-function is_fedora() { (( $+commands[dnf] )) }
-function is_wayland() { [[ $XDG_SESSION_TYPE == "wayland" ]] }
-
 export DOTDIR=~/.dot
 export ZDOTDIR=$DOTDIR/zsh
 export GIT_CONFIG_GLOBAL=$DOTDIR/git/.gitconfig
@@ -32,6 +22,7 @@ for xdgdir in XDG_{CONFIG,CACHE,DATA,STATE}_HOME XDG_RUNTIME_DIR; do
   [[ -e ${(P)xdgdir} ]] || mkdir -p ${(P)xdgdir}
 done
 
+# Add common path locations
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:$HOME/.local/bin
 
@@ -42,3 +33,15 @@ export XCOMPOSEFILE=$DOTDIR/.XCompose
 # Editor
 export EDITOR=code
 
+# Conditionals
+function is_mac() { [[ "$OSTYPE" == "darwin"* ]] }
+function is_pc() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"pc"* ]] }
+function is_homelab() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"homelab"* ]] }
+function is_cloud() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"cloud"* ]] }
+
+function is_deb() { (( $+commands[apt] )) }
+function is_arch() { (( $+commands[pacman] )) }
+function is_fedora() { (( $+commands[dnf] )) }
+function is_wayland() { [[ $XDG_SESSION_TYPE == "wayland" ]] }
+
+function is_work() { [[ "$WORK_PC" == "true" ]] }

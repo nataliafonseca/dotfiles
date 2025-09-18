@@ -42,3 +42,8 @@ source $zsh_plugins
 
 # load aliases
 source $ZDOTDIR/.zaliases
+
+# keybindings
+bindkey  "^[[H"   beginning-of-line     # home key
+bindkey  "^[[F"   end-of-line           # end key
+bindkey  "\^U"    backward-kill-line    # ctrl+u

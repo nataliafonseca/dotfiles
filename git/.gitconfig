@@ -52,5 +52,3 @@
 [includeIf "gitdir:Nutrien/"]
 	path = ~/.dot/git/.nutrien.gitconfig
 
-[includeIf "gitdir:Iteris/"]
-	path = ~/.dot/git/.iteris.gitconfig
