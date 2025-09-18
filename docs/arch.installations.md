@@ -69,7 +69,8 @@ systemctl enable --now sshd
 installing packages:
 
 ```sh
-yay -S --needed --noconfirm github-cli direnv nvm docker docker-compose uv code gnome-terminal firefox microsoft-edge-stable-bin claude-code sublime-text-4 fastfetch &&\ pacman:r gnome-console
+yay -S --needed --noconfirm github-cli direnv nvm docker docker-compose uv code gnome-terminal firefox microsoft-edge-stable-bin claude-code gemini-cli sublime-text-4 fastfetch &&\
+pacman:r gnome-console
 ```
 
 nerd fonts:
