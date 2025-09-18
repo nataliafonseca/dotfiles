@@ -1,4 +1,35 @@
 #!/usr/bin/env zsh
 
-mkdir $1
-cd $1
+##? take - Create directory and immediately cd into it
+##? Usage: take <directory_name>
+##?
+##? Creates a new directory (with parent directories if needed) and changes into it
+##? Equivalent to: mkdir -p <directory> && cd <directory>
+##?
+##? Examples:
+##?   take newproject           # Create and enter 'newproject'
+##?   take path/to/deep/dir     # Create nested directories and enter the deepest
+
+if [[ $# -eq 0 ]]; then
+    echo "Usage: take <directory_name>"
+    echo "Create directory and immediately cd into it"
+    return 1
+fi
+
+local dir="$1"
+
+if [[ -e "$dir" && ! -d "$dir" ]]; then
+    echo "take: '$dir' exists but is not a directory" >&2
+    return 1
+fi
+
+if [[ -d "$dir" ]]; then
+    echo "Directory '$dir' already exists, entering it"
+    cd "$dir"
+else
+    echo "Creating and entering directory: $dir"
+    mkdir -p "$dir" && cd "$dir" || {
+        echo "take: failed to create directory '$dir'" >&2
+        return 1
+    }
+fi

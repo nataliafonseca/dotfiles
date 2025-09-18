@@ -1,12 +1,37 @@
 #!/usr/bin/env zsh
 
-local now f
+##? bak - Create timestamped backup copies of files or directories
+##? Usage: bak <file1> [file2] [file3] ...
+##? Creates backups with format: filename.YYYYMMDD-HHMMSS.bak
+
+if [[ $# -eq 0 ]]; then
+    echo "Usage: bak <file1> [file2] [file3] ..."
+    echo "Creates timestamped backup copies of files or directories"
+    echo "Format: filename.YYYYMMDD-HHMMSS.bak"
+    return 1
+fi
+
+local now f backup_name
 now=$(date +"%Y%m%d-%H%M%S")
 
 for f in "$@"; do
-  if [[ ! -e "$f" ]]; then
-    echo "file not found: $f" >&2
-    continue
-  fi
-  cp -R "$f" "$f".$now.bak
+    if [[ ! -e "$f" ]]; then
+        echo "bak: '$f' not found, skipping" >&2
+        continue
+    fi
+
+    backup_name="$f.$now.bak"
+
+    if [[ -d "$f" ]]; then
+        echo "Backing up directory: $f → $backup_name"
+    else
+        echo "Backing up file: $f → $backup_name"
+    fi
+
+    cp -R "$f" "$backup_name" || {
+        echo "bak: failed to backup '$f'" >&2
+        continue
+    }
 done
+
+echo "Backup complete with timestamp: $now"

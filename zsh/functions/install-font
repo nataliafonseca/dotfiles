@@ -1,34 +1,124 @@
 #!/usr/bin/env zsh
 
-# Check if the URL is provided
-if [ -z "$1" ]; then
-  echo "Please provide a URL to a font zip file."
-  exit 1
+##? install-font - Install fonts from URL, local zip, or local directory
+##? Usage: install-font <url|zip_file|directory> [font_name]
+
+local source="$1"
+local font_name="$2"
+local temp_dir=""
+local source_dir=""
+local is_temp=false
+
+# Check if source is provided
+if [[ -z "$source" ]]; then
+    echo "Usage: install-font <url|zip_file|directory> [font_name]"
+    echo "  url:       https://example.com/font.zip"
+    echo "  zip_file:  /path/to/font.zip"
+    echo "  directory: /path/to/font/folder"
+    echo "  font_name: Optional name for the font folder (defaults to zip/directory name)"
+    return 1
 fi
 
 echo "Installing font..."
 
-# Create a temporary directory
-TEMP_DIR=$(mktemp -d --tmpdir=$XDG_CACHE_HOME)
+# Determine source type and prepare source directory
+if [[ "$source" =~ ^https?:// ]]; then
+    # URL - download to temp directory
+    temp_dir=$(mktemp -d --tmpdir=${XDG_CACHE_HOME:-$HOME/.cache})
+    is_temp=true
 
-# Download the font zip file
-wget -O "$TEMP_DIR/font.zip" "$1"
+    echo "Downloading font from URL..."
+    wget -O "$temp_dir/font.zip" "$source" || {
+        echo "Failed to download font"
+        rm -rf "$temp_dir"
+        return 1
+    }
 
-# Unzip the font file
-unzip "$TEMP_DIR/font.zip" -d "$TEMP_DIR"
+    echo "Extracting font archive..."
+    unzip -q "$temp_dir/font.zip" -d "$temp_dir" || {
+        echo "Failed to extract font archive"
+        rm -rf "$temp_dir"
+        return 1
+    }
 
-# Create user fonts directory if it doesn't exist
-mkdir -p $XDG_DATA_HOME/fonts/
+    source_dir="$temp_dir"
 
-# Move the font files to the user fonts directory
-sudo mv "$TEMP_DIR"/*.ttf $XDG_DATA_HOME/fonts/
-sudo mv "$TEMP_DIR"/*.otf $XDG_DATA_HOME/fonts/
+    # Set default font name from URL if not provided
+    if [[ -z "$font_name" ]]; then
+        font_name="${source##*/}"      # Get filename from URL
+        font_name="${font_name%.zip}"  # Remove .zip extension
+    fi
 
-# Update the font cache
-fc-cache -f -v
+elif [[ -f "$source" && "$source" == *.zip ]]; then
+    # Local zip file
+    temp_dir=$(mktemp -d --tmpdir=${XDG_CACHE_HOME:-$HOME/.cache})
+    is_temp=true
 
-# Clean up
-rm -rf "$TEMP_DIR"
+    echo "Extracting local font archive..."
+    unzip -q "$source" -d "$temp_dir" || {
+        echo "Failed to extract font archive"
+        rm -rf "$temp_dir"
+        return 1
+    }
 
-echo "Fonts installed successfully!"
+    source_dir="$temp_dir"
 
+    # Set default font name from zip filename if not provided
+    if [[ -z "$font_name" ]]; then
+        font_name="${source##*/}"      # Get filename
+        font_name="${font_name%.zip}"  # Remove .zip extension
+    fi
+
+elif [[ -d "$source" ]]; then
+    # Local directory
+    source_dir="$source"
+    is_temp=false
+
+    # Set default font name from directory name if not provided
+    if [[ -z "$font_name" ]]; then
+        font_name="${source##*/}"  # Get directory name
+    fi
+
+else
+    echo "Error: '$source' is not a valid URL, zip file, or directory"
+    return 1
+fi
+
+# Create target directory
+local target_dir="$XDG_DATA_HOME/fonts/$font_name"
+mkdir -p "$target_dir"
+
+# Find and copy font files
+local font_files_found=false
+local file
+
+# Look for font files in source directory and subdirectories
+for file in "$source_dir"/**/*.(ttf|otf|TTF|OTF)(N); do
+    if [[ -f "$file" ]]; then
+        font_files_found=true
+        echo "Installing: ${file##*/}"
+        cp "$file" "$target_dir/"
+    fi
+done
+
+# Check if any font files were found
+if [[ "$font_files_found" == false ]]; then
+    echo "No font files (.ttf, .otf) found in source"
+    rmdir "$target_dir" 2>/dev/null  # Remove empty directory
+    if [[ "$is_temp" == true ]]; then
+        rm -rf "$temp_dir"
+    fi
+    return 1
+fi
+
+# Update font cache
+echo "Updating font cache..."
+fc-cache -f -v >/dev/null 2>&1
+
+# Clean up temporary directory if created
+if [[ "$is_temp" == true ]]; then
+    rm -rf "$temp_dir"
+fi
+
+echo "Fonts installed successfully to '$target_dir'"
+echo "Installed font family: $font_name"

@@ -1,0 +1,211 @@
+#!/usr/bin/env zsh
+
+##? degit - Clone specific directories from git repositories without git history
+##? Usage: degit <git_url> [--dir|-d <directory>] [--out|-o <output>] [--branch <branch>] [--commit <commit>]
+##?        degit <github_url_with_path>
+
+local git_url="" directory="" output="" branch="" commit="" temp_dir=""
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --dir|-d)
+            directory="$2"
+            shift 2
+            ;;
+        --out|-o)
+            output="$2"
+            shift 2
+            ;;
+        --branch)
+            branch="$2"
+            shift 2
+            ;;
+        --commit)
+            commit="$2"
+            shift 2
+            ;;
+        -*)
+            echo "Unknown option $1"
+            return 1
+            ;;
+        *)
+            if [[ -z "$git_url" ]]; then
+                git_url="$1"
+            else
+                echo "Multiple URLs provided"
+                return 1
+            fi
+            shift
+            ;;
+    esac
+done
+
+if [[ -z "$git_url" ]]; then
+    echo "Usage: degit <git_url> [--dir|-d <directory>] [--out|-o <output>] [--branch <branch>] [--commit <commit>]"
+    echo "       degit <github_url_with_path>"
+    return 1
+fi
+
+# Parse GitHub URLs with embedded path/branch/commit
+# Handle both with and without https:// protocol
+if [[ "$git_url" =~ ^(https://)?github\.com/([^/]+)/([^/]+)/tree/([^/]+)/?(.*)$ ]]; then
+    local owner="${match[2]}"
+    local repo="${match[3]}"
+    local ref="${match[4]}"
+    local repo_path="${match[5]}"
+
+    # Reconstruct the git URL
+    git_url="https://github.com/$owner/$repo.git"
+
+    # Set directory if not already specified
+    if [[ -z "$directory" && -n "$repo_path" ]]; then
+        directory="$repo_path"
+    fi
+
+    # Determine if ref is a commit hash or branch name
+    if [[ "$ref" =~ ^[0-9a-f]{7,40}$ ]]; then
+        if [[ -z "$commit" ]]; then
+            commit="$ref"
+        fi
+    else
+        if [[ -z "$branch" ]]; then
+            branch="$ref"
+        fi
+    fi
+fi
+
+# Set defaults
+if [[ -z "$branch" && -z "$commit" ]]; then
+    branch="main"
+fi
+
+# Determine output directory
+if [[ -z "$output" ]]; then
+    if [[ -n "$directory" ]]; then
+        output="${directory##*/}"  # Last component of path
+    else
+        # Extract repo name from git URL
+        output="${git_url##*/}"
+        output="${output%.git}"
+    fi
+fi
+
+# Create temporary directory
+temp_dir=$(mktemp -d --tmpdir=${XDG_CACHE_HOME:-$HOME/.cache})
+if [[ $? -ne 0 ]]; then
+    echo "Failed to create temporary directory"
+    return 1
+fi
+
+echo "Cloning repository..."
+
+# Clone the repository with sparse-checkout if directory is specified
+if [[ -n "$directory" ]]; then
+    # Use sparse-checkout for specific directory
+    git clone --filter=blob:none --no-checkout "$git_url" "$temp_dir" || {
+        echo "Failed to clone repository"
+        rm -rf "$temp_dir"
+        return 1
+    }
+
+    cd "$temp_dir"
+    git config advice.detachedHead false
+    git sparse-checkout init --cone
+    git sparse-checkout set "$directory"
+
+    if [[ -n "$commit" ]]; then
+        git checkout "$commit" || {
+            echo "Failed to checkout commit $commit"
+            cd - > /dev/null
+            rm -rf "$temp_dir"
+            return 1
+        }
+    else
+        git checkout "$branch" || {
+            echo "Failed to checkout branch $branch"
+            cd - > /dev/null
+            rm -rf "$temp_dir"
+            return 1
+        }
+    fi
+    cd - > /dev/null
+else
+    # Clone entire repository
+    if [[ -n "$commit" ]]; then
+        # Clone and checkout specific commit
+        git clone --no-checkout "$git_url" "$temp_dir" || {
+            echo "Failed to clone repository"
+            rm -rf "$temp_dir"
+            return 1
+        }
+
+        cd "$temp_dir"
+        git config advice.detachedHead false
+        git checkout "$commit" || {
+            echo "Failed to checkout commit $commit"
+            cd - > /dev/null
+            rm -rf "$temp_dir"
+            return 1
+        }
+        cd - > /dev/null
+    else
+        # Clone specific branch
+        git clone --depth 1 --branch "$branch" "$git_url" "$temp_dir" || {
+            echo "Failed to clone repository (branch: $branch)"
+            rm -rf "$temp_dir"
+            return 1
+        }
+    fi
+fi
+
+# Handle directory extraction
+if [[ -n "$directory" ]]; then
+    if [[ ! -d "$temp_dir/$directory" ]]; then
+        echo "Directory '$directory' not found in repository"
+        rm -rf "$temp_dir"
+        return 1
+    fi
+
+    # Handle existing output directory
+    local final_output="$output"
+    local counter=1
+
+    if [[ -e "$output" ]]; then
+        echo "Warning: Directory '$output' already exists, finding alternative name..."
+        while [[ -e "$output-$counter" ]]; do
+            ((counter++))
+        done
+        final_output="$output-$counter"
+        echo "Using '$final_output' instead"
+    fi
+
+    # Copy specific directory
+    cp -r "$temp_dir/$directory" "$final_output"
+else
+    # Handle existing output directory
+    local final_output="$output"
+    local counter=1
+
+    if [[ -e "$output" ]]; then
+        echo "Warning: Directory '$output' already exists, finding alternative name..."
+        while [[ -e "$output-$counter" ]]; do
+            ((counter++))
+        done
+        final_output="$output-$counter"
+        echo "Using '$final_output' instead"
+    fi
+
+    # Copy entire repository
+    cp -r "$temp_dir" "$final_output"
+fi
+
+# Remove .git directory from output
+if [[ -d "$final_output/.git" ]]; then
+    rm -rf "$final_output/.git"
+fi
+
+# Clean up temporary directory
+rm -rf "$temp_dir"
+
+echo "Successfully extracted to '$final_output'"

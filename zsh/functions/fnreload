@@ -1,10 +1,33 @@
 #!/usr/bin/env zsh
 
-ZFUNCDIR=${ZFUNCDIR:-$ZDOTDIR/functions}
+##? fnreload - Reload all zsh functions from the functions directory
+##? Usage: fnreload [directory]
+##?
+##? Reloads all functions from the specified directory or $ZDOTDIR/functions
+##? Useful after modifying function files to pick up changes without restarting shell
+##?
+##? Examples:
+##?   fnreload                    # Reload from default functions directory
+##?   fnreload ~/my-functions     # Reload from custom directory
 
-local fn
+local func_dir="${1:-${ZFUNCDIR:-$ZDOTDIR/functions}}"
 
-for fn in $ZFUNCDIR/**/*(.); do
-  unfunction "${fn:t}" &>/dev/null
-  autoload -Uz "$fn"
+if [[ ! -d "$func_dir" ]]; then
+    echo "fnreload: directory '$func_dir' not found" >&2
+    return 1
+fi
+
+echo "Reloading functions from: $func_dir"
+
+local fn count=0
+
+for fn in "$func_dir"/**/*(.N); do
+    if [[ -f "$fn" ]]; then
+        unfunction "${fn:t}" &>/dev/null
+        autoload -Uz "$fn"
+        echo "  ✓ ${fn:t}"
+        ((count++))
+    fi
 done
+
+echo "Reloaded $count functions"

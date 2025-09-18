@@ -1,5 +1,60 @@
 #!/usr/bin/env zsh
 
-ffmpeg -y -i "$1" -vf palettegen _tmp_palette.png
-ffmpeg -y -i "$1" -i _tmp_palette.png -filter_complex paletteuse -r 10  "${1%.*}.gif"
-rm _tmp_palette.png
+##? gifconvert - Convert video files to optimized GIF animations
+##? Usage: gifconvert <input_video> [output_file] [framerate]
+##?
+##? Converts video files to high-quality GIF using ffmpeg with palette optimization
+##?
+##? Arguments:
+##?   input_video    Video file to convert (mp4, mov, avi, etc.)
+##?   output_file    Optional output filename (defaults to input name with .gif)
+##?   framerate      Optional framerate (defaults to 10 fps)
+##?
+##? Examples:
+##?   gifconvert video.mp4                    # Creates video.gif at 10fps
+##?   gifconvert video.mp4 animation.gif     # Custom output name
+##?   gifconvert video.mp4 animation.gif 15  # Custom name and framerate
+
+if [[ $# -eq 0 ]]; then
+    echo "Usage: gifconvert <input_video> [output_file] [framerate]"
+    echo "Convert video files to optimized GIF animations"
+    return 1
+fi
+
+local input="$1"
+local output="${2:-${1%.*}.gif}"
+local framerate="${3:-10}"
+
+if [[ ! -f "$input" ]]; then
+    echo "gifconvert: input file '$input' not found" >&2
+    return 1
+fi
+
+if ! command -v ffmpeg >/dev/null 2>&1; then
+    echo "gifconvert: ffmpeg not found. Please install ffmpeg." >&2
+    return 1
+fi
+
+echo "Converting '$input' to '$output' at ${framerate}fps..."
+
+# Create palette for better color quality
+local palette_file=$(mktemp --suffix=_palette.png)
+
+echo "Generating color palette..."
+ffmpeg -y -i "$input" -vf palettegen "$palette_file" -loglevel warning || {
+    echo "gifconvert: failed to generate palette" >&2
+    rm -f "$palette_file"
+    return 1
+}
+
+echo "Creating GIF..."
+ffmpeg -y -i "$input" -i "$palette_file" -filter_complex paletteuse -r "$framerate" "$output" -loglevel warning || {
+    echo "gifconvert: failed to create GIF" >&2
+    rm -f "$palette_file"
+    return 1
+}
+
+# Clean up
+rm -f "$palette_file"
+
+echo "✓ Successfully created: $output"

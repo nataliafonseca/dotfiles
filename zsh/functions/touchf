@@ -1,6 +1,61 @@
 #!/usr/bin/env zsh
 
-# makes any dirs recursively and then touches a file if it doesn't exist
-if [[ -n "$1" ]] && [[ ! -f "$1" ]]; then
-  mkdir -p "$1:h" && touch "$1"
+##? touchf - Create file with parent directories
+##? Usage: touchf <file_path> [file_path2] ...
+##?
+##? Creates files along with any necessary parent directories
+##? Similar to 'touch' but automatically creates parent directories
+##?
+##? Examples:
+##?   touchf newfile.txt              # Create file in current directory
+##?   touchf path/to/deep/file.txt    # Create directories and file
+##?   touchf file1.txt dir/file2.txt  # Create multiple files
+
+if [[ $# -eq 0 ]]; then
+    echo "Usage: touchf <file_path> [file_path2] ..."
+    echo "Create files with parent directories"
+    return 1
+fi
+
+local file success=true
+
+for file in "$@"; do
+    if [[ -z "$file" ]]; then
+        echo "touchf: empty file path, skipping" >&2
+        success=false
+        continue
+    fi
+
+    if [[ -d "$file" ]]; then
+        echo "touchf: '$file' is a directory, skipping" >&2
+        success=false
+        continue
+    fi
+
+    if [[ -f "$file" ]]; then
+        echo "File '$file' already exists, updating timestamp"
+        touch "$file"
+    else
+        local parent_dir="${file:h}"
+
+        if [[ "$parent_dir" != "." && ! -d "$parent_dir" ]]; then
+            echo "Creating directories: $parent_dir"
+            mkdir -p "$parent_dir" || {
+                echo "touchf: failed to create directory '$parent_dir'" >&2
+                success=false
+                continue
+            }
+        fi
+
+        echo "Creating file: $file"
+        touch "$file" || {
+            echo "touchf: failed to create file '$file'" >&2
+            success=false
+            continue
+        }
+    fi
+done
+
+if [[ "$success" == false ]]; then
+    return 1
 fi

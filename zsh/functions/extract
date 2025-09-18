@@ -1,13 +1,36 @@
 #!/usr/bin/env zsh
-# https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/extract/extract.plugin.zsh
+
+##? extract - Universal archive extraction utility
+##? Usage: extract [-r|--remove] <archive1> [archive2] ...
+##?
+##? Supports: tar.gz, tar.bz2, tar.xz, tar.zst, zip, rar, 7z, deb, rpm,
+##?           gz, bz2, xz, lzma, lz4, zst, cab, cpio, and more
+##?
+##? Options:
+##?   -r, --remove    Remove archive after successful extraction
+##?
+##? Examples:
+##?   extract file.tar.gz           # Extract to current directory
+##?   extract -r archive.zip        # Extract and remove original
+##?   extract *.tar.gz              # Extract multiple archives
+
+# Based on: https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/extract/extract.plugin.zsh
 setopt localoptions noautopushd
 
 if (( $# == 0 )); then
   cat >&2 <<'EOF'
-Usage: extract [-option] [file ...]
+Usage: extract [-r|--remove] <archive1> [archive2] ...
+
+Universal archive extraction utility supporting many formats.
+
 Options:
-  -r, --remove    Remove archive after unpacking.
+  -r, --remove    Remove archive after successful extraction
+
+Supported formats:
+  tar.gz, tar.bz2, tar.xz, tar.zst, zip, rar, 7z, deb, rpm,
+  gz, bz2, xz, lzma, lz4, zst, cab, cpio, and more
 EOF
+  return 1
 fi
 
 local remove_archive=1

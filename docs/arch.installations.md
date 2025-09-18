@@ -141,6 +141,12 @@ for profile in $(dconf list /org/gnome/terminal/legacy/profiles:/ | grep -E '^:.
 done
 ```
 
+adding some padding:
+
+```sh
+mkdir -p ~/.config/gtk-3.0 && echo 'vte-terminal { padding: 4px; }' > ~/.config/gtk-3.0/gtk.css
+```
+
 ### Other settings to remember
 
 - Settings > Power > Power Button Behavior: Power Off
