@@ -4,3 +4,4 @@
 .env
 .zcompdump
 .zsh_history
+zsh/plugins/karabiner/config/automatic_backups/

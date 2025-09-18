@@ -1,4 +1,5 @@
 $ZDOTDIR/plugins/homebrew conditional:is_mac
+$ZDOTDIR/plugins/karabiner conditional:is_mac
 
 ### ^^^
 
