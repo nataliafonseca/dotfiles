@@ -1,32 +1,56 @@
+# Global aliases and shell shortcuts
+# Configuration shortcuts
 alias reload='exec $SHELL'
 alias dotconfig="$EDITOR $DOTDIR"
 alias zconfig="$EDITOR $ZDOTDIR"
 
+# Global directory navigation aliases
 alias -g ...='../..'
 alias -g ....='../../..'
 alias -g .....='../../../..'
 alias -g ......='../../../../..'
 
+# Development tools (conditional based on availability)
 (( $+commands[gh] )) && alias clone="gh repo clone"
 (( $+commands[vagrant] )) && alias vagrant="sudo vagrant"
 
-# ls and exa
+# Enhanced file listing (eza preferred over ls)
 alias la='ls -laa'
 alias ldot='ls -ld .*'
-(( $+commands[eza] )) && alias ls="eza -lh --icons  --time-style=long-iso --group-directories-first --sort=name --sort=ext"
-(( $+commands[eza] )) && alias tree="eza --icons --tree"
+if (( $+commands[eza] )); then
+    alias ls="eza -lh --icons --time-style=long-iso --group-directories-first --sort=name --sort=ext"
+    alias tree="eza --icons --tree"
+    alias ll="eza -la --icons --time-style=long-iso --group-directories-first"
+fi
 
-# use bat instead of cat if bat is installed
+# Enhanced file viewing (bat preferred over cat)
 (( $+commands[bat] )) && alias cat="bat --style=plain"
 
-# fix typos
+# Common typo fixes
 alias quit='exit'
 alias cd..='cd ..'
+alias claer='clear'
+alias grpe='grep'
 
-# tar
+# Archive utilities
 alias tarls="tar -tvf"
 alias untar="tar -xf"
 
-# date/time
+# Date/time utilities
 alias timestamp="date '+%Y-%m-%d %H:%M:%S'"
 alias datestamp="date '+%Y-%m-%d'"
+alias epoch="date +%s"
+
+# System utilities
+alias df='df -h'
+alias du='du -h'
+alias free='free -h'
+
+# Network utilities
+alias myip="curl -s ifconfig.me"
+alias localip="ip route get 1 | awk '{print \$NF;exit}'"
+
+# Process management
+alias psg="ps aux | grep"
+alias topcpu="ps auxf | sort -nr -k 3 | head -10"
+alias topmem="ps auxf | sort -nr -k 4 | head -10"

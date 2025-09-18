@@ -1,12 +1,49 @@
-node_modules
-venv
-.venv
-.idea
+# Global Git Ignore File
+# Common files and directories to ignore across all projects
+
+# Dependencies and packages
+node_modules/
+venv/
+.venv/
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS generated files
 .DS_Store
-__pycache__
-obj
-bin
-dist
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Build outputs and artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+obj/
+bin/
+dist/
+build/
+*.egg-info/
+
+# Environment and configuration files
 .env*
 !.env*.example
-.claude
+config.local.*
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+.cache/
+
+# AI and development tools
+.claude/
+.cursor/
