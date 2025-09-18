@@ -10,7 +10,3 @@ ZLE_RPROMPT_INDENT=0
 if ! is_mac; then
     typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='󰌽'
 fi
-
-if is_wayland; then
-    echo is_wayland
-fi

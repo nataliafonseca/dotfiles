@@ -2,7 +2,8 @@ $ZDOTDIR/plugins/homebrew conditional:is_mac
 
 ### ^^^
 
-# $ZDOTDIR/plugins/python
+$ZDOTDIR/plugins/pacman conditional:is_arch
+$ZDOTDIR/plugins/python
 $ZDOTDIR/plugins/docker
 $ZDOTDIR/plugins/nvm
 $ZDOTDIR/plugins/speedtest
