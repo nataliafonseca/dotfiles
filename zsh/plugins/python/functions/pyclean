@@ -1,8 +1,54 @@
 #!/usr/bin/env zsh
 
-##? Clean common python cache files.
+##? pyclean - Clean Python cache files and directories
+##? Usage: pyclean [directories...]
+##?
+##? Removes Python cache files and directories to clean up the workspace
+##?
+##? Arguments:
+##?   directories  Directories to clean (defaults to current directory)
+##?
+##? Removes:
+##?   *.pyc, *.pyo files
+##?   __pycache__ directories
+##?   .mypy_cache directories
+##?   .pytest_cache directories
+##?
+##? Examples:
+##?   pyclean              # Clean current directory
+##?   pyclean src tests    # Clean specific directories
 
-find "${@:-.}" -type f -name "*.py[co]" -delete
-find "${@:-.}" -type d -name "__pycache__" -delete
-find "${@:-.}" -depth -type d -name ".mypy_cache" -exec rm -r "{}" +
-find "${@:-.}" -depth -type d -name ".pytest_cache" -exec rm -r "{}" +
+local targets=("${@:-.}")
+local cleaned_files=0
+local cleaned_dirs=0
+
+echo "Cleaning Python cache files in: ${targets[*]}"
+
+# Count and remove .pyc/.pyo files
+for target in "${targets[@]}"; do
+    if [[ ! -d "$target" ]]; then
+        echo "pyclean: '$target' is not a directory, skipping" >&2
+        continue
+    fi
+
+    local pyc_files=($(find "$target" -type f -name "*.py[co]" 2>/dev/null))
+    if (( ${#pyc_files[@]} > 0 )); then
+        find "$target" -type f -name "*.py[co]" -delete
+        cleaned_files=$(( cleaned_files + ${#pyc_files[@]} ))
+    fi
+done
+
+# Count and remove cache directories
+for cache_pattern in "__pycache__" ".mypy_cache" ".pytest_cache"; do
+    for target in "${targets[@]}"; do
+        [[ -d "$target" ]] || continue
+
+        local cache_dirs=($(find "$target" -type d -name "$cache_pattern" 2>/dev/null))
+        if (( ${#cache_dirs[@]} > 0 )); then
+            find "$target" -depth -type d -name "$cache_pattern" -exec rm -rf "{}" + 2>/dev/null
+            cleaned_dirs=$(( cleaned_dirs + ${#cache_dirs[@]} ))
+        fi
+    done
+done
+
+echo "✓ Cleaned $cleaned_files cache files and $cleaned_dirs cache directories"

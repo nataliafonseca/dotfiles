@@ -1,24 +1,87 @@
 #!/usr/bin/env zsh
 
-# Open/edit quick note
+##? n - Create and edit quick notes with timestamps
+##? Usage: n [options] [filename]
+##?
+##? Creates timestamped notes in your quick notes directory
+##?
+##? Options:
+##?   -h, --help               Show this help message
+##?   -p, --permanote          Create/edit permanent note (permanote.md)
+##?   -e, --editor <editor>    Use specific editor (defaults to $EDITOR)
+##?
+##? Examples:
+##?   n                        # Create timestamped note (2024-09-17_14-30-45.md)
+##?   n todo                   # Create note named "todo.md"
+##?   n -p                     # Edit permanent note file
+##?   n --editor vim myfile    # Use vim for this note
+
+if [[ ! -d "$QUICK_NOTES_DIR" ]]; then
+    echo "Creating notes directory: $QUICK_NOTES_DIR"
+    mkdir -p "$QUICK_NOTES_DIR"
+fi
 
 local filename="$(date '+%Y-%m-%d_%H-%M-%S').md"
 local editor="$EDITOR"
 
 local usage=(
-  "n [-h|--help]"
-  "n [-p|--permanote] [-e|--editor=<editor>] [<filename>]"
+    "Usage: n [options] [filename]"
+    ""
+    "Options:"
+    "  -h, --help               Show this help message"
+    "  -p, --permanote          Create/edit permanent note (permanote.md)"
+    "  -e, --editor <editor>    Use specific editor"
+    ""
+    "Examples:"
+    "  n                        # Create timestamped note"
+    "  n todo                   # Create note named 'todo.md'"
+    "  n -p                     # Edit permanent note"
 )
 
 while (( $# )); do
-  case $1 in
-    -h|--help)          printf "%s\n" $usage && return  ;;
-    -e|--editor)        shift; editor=$1                ;;
-    -e=*|--editor=*)    editor="${1#*=}"                ;;
-    -p|--permanote)     filename="permanote.md"         ;;
-    *)                  filename="$@"; break         ;;
-  esac
-  shift
+    case $1 in
+        -h|--help)
+            printf "%s\n" $usage
+            return 0
+            ;;
+        -e|--editor)
+            if [[ -z "$2" ]]; then
+                echo "n: --editor requires an argument" >&2
+                return 1
+            fi
+            shift; editor=$1
+            ;;
+        -e=*|--editor=*)
+            editor="${1#*=}"
+            if [[ -z "$editor" ]]; then
+                echo "n: --editor requires an argument" >&2
+                return 1
+            fi
+            ;;
+        -p|--permanote)
+            filename="permanote.md"
+            ;;
+        -*)
+            echo "n: unknown option '$1'" >&2
+            echo "Use 'n --help' for usage information"
+            return 1
+            ;;
+        *)
+            # If filename doesn't end with .md, add it
+            filename="$*"
+            [[ "$filename" == *.md ]] || filename="$filename.md"
+            break
+            ;;
+    esac
+    shift
 done
 
-$EDITOR "$QUICK_NOTES_DIR/$filename"
+if [[ -z "$editor" ]]; then
+    echo "n: no editor available. Set \$EDITOR or use --editor option" >&2
+    return 1
+fi
+
+local note_path="$QUICK_NOTES_DIR/$filename"
+
+echo "Opening note: $note_path"
+"$editor" "$note_path"

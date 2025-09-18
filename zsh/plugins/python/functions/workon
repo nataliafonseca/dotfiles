@@ -1,15 +1,69 @@
 #!/usr/bin/env zsh
 
-##? Work on (activate) a Python venv.
+##? workon - Activate Python virtual environment
+##? Usage: workon <environment_name|.>
+##?
+##? Activates a Python virtual environment
+##?
+##? Arguments:
+##?   environment_name  Name of environment in WORKON_HOME
+##?   .                 Activate .venv in current directory
+##?
+##? Examples:
+##?   workon myproject  # Activate named environment
+##?   workon .          # Activate local .venv
 
 local WORKON_HOME=${WORKON_HOME:-${XDG_DATA_HOME:-$HOME/.local/share}/venvs}
+
 if [[ -z "$1" ]]; then
-  >&2 echo "Expecting workon project name" && return 1
-elif [[ "$1" == "." ]]; then
-  source "./.venv/bin/activate" && return 0
-elif [[ -z "$WORKON_HOME" ]]; then
-  >&2 echo "\$WORKON_HOME not set" && return 1
-elif [[ ! -d "$WORKON_HOME" ]]; then
-  >&2 echo "\$WORKON_HOME directory not found: $WORKON_HOME" && return 1
+    echo "Usage: workon <environment_name|.>"
+    echo ""
+    echo "Available environments:"
+    if [[ -d "$WORKON_HOME" ]]; then
+        local envs=($(ls "$WORKON_HOME" 2>/dev/null))
+        if (( ${#envs[@]} > 0 )); then
+            printf "  %s\n" "${envs[@]}"
+        else
+            echo "  (no environments found)"
+        fi
+    else
+        echo "  (WORKON_HOME not found: $WORKON_HOME)"
+    fi
+    echo ""
+    echo "Local .venv:"
+    if [[ -d ".venv" ]]; then
+        echo "  . (current directory)"
+    else
+        echo "  (no .venv in current directory)"
+    fi
+    return 1
 fi
+
+if [[ "$1" == "." ]]; then
+    if [[ ! -d ".venv" ]]; then
+        echo "workon: no .venv found in current directory" >&2
+        return 1
+    fi
+    echo "Activating local virtual environment: .venv"
+    source "./.venv/bin/activate"
+    return 0
+fi
+
+if [[ -z "$WORKON_HOME" ]]; then
+    echo "workon: \$WORKON_HOME not set" >&2
+    return 1
+fi
+
+if [[ ! -d "$WORKON_HOME" ]]; then
+    echo "workon: \$WORKON_HOME directory not found: $WORKON_HOME" >&2
+    return 1
+fi
+
+if [[ ! -d "$WORKON_HOME/$1" ]]; then
+    echo "workon: environment '$1' not found in $WORKON_HOME" >&2
+    echo "Use 'mkvenv $1' to create it"
+    return 1
+fi
+
+echo "Activating virtual environment: $1"
 source "$WORKON_HOME/$1/bin/activate"

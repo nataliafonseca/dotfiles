@@ -1,14 +1,51 @@
 #!/usr/bin/env zsh
 
-##? Make a Python virtual environment with `python3 -m venv`.
+##? mkvenv - Create Python virtual environment
+##? Usage: mkvenv [environment_name]
+##?
+##? Creates a Python virtual environment using python3 -m venv
+##?
+##? Arguments:
+##?   environment_name  Optional name for environment (stored in WORKON_HOME)
+##?                    If not provided, creates .venv in current directory
+##?
+##? Examples:
+##?   mkvenv            # Create .venv in current directory
+##?   mkvenv myproject  # Create named environment in WORKON_HOME
 
 local WORKON_HOME=${WORKON_HOME:-${XDG_DATA_HOME:-$HOME/.local/share}/venvs}
 
 if [[ -z "$1" ]]; then
-  python3 -m venv ".venv" && return 0
-elif [[ -z "$WORKON_HOME" ]]; then
-  >&2 echo "mkvenv: \$WORKON_HOME not set" && return 1
+    if [[ -d ".venv" ]]; then
+        echo "mkvenv: .venv already exists in current directory" >&2
+        return 1
+    fi
+    echo "Creating local virtual environment: .venv"
+    python3 -m venv ".venv" || {
+        echo "mkvenv: failed to create virtual environment" >&2
+        return 1
+    }
+    echo "✓ Virtual environment created: .venv"
+    echo "Activate with: source .venv/bin/activate"
+    return 0
 fi
 
-python3 -m venv "$WORKON_HOME/$1"
+if [[ -z "$WORKON_HOME" ]]; then
+    echo "mkvenv: \$WORKON_HOME not set" >&2
+    return 1
+fi
+
+if [[ -d "$WORKON_HOME/$1" ]]; then
+    echo "mkvenv: environment '$1' already exists" >&2
+    return 1
+fi
+
+echo "Creating virtual environment: $1"
+python3 -m venv "$WORKON_HOME/$1" || {
+    echo "mkvenv: failed to create virtual environment" >&2
+    return 1
+}
+
+echo "✓ Virtual environment created: $1"
+echo "Activating environment..."
 workon "$1"
