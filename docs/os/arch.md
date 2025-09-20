@@ -1,0 +1,60 @@
+# Arch Linux
+
+## Initial requirements
+
+```sh
+sudo pacman -S --needed --noconfirm git base-devel curl zsh bat eza micro fzf imagemagick xclip samba ntfs-3g less && \
+git clone https://aur.archlinux.org/yay.git && \
+cd yay && makepkg -si && \
+cd .. && rm -rf yay && \
+yay -Y --gendb && \
+yay -Syu --devel && \
+yay -Y --devel --save
+```
+
+--8<-- "./docs/common/bootstrap.md"
+
+--8<-- "./docs/common/ssh.md"
+
+## Installations
+
+installing packages:
+
+```sh
+yay -S --needed --noconfirm github-cli direnv nvm docker docker-compose uv code gnome-terminal flatpak firefox zen-browser-bin snipaste claude-code gemini-cli sublime-text-4 fastfetch gnome-browser-connector gtk-engine-murrine dnsutils jq && \
+sudo pacman -R gnome-console
+```
+
+nerd fonts:
+
+```sh
+tag=$(curl -fsSL https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | jq -r '.tag_name') && \
+install-font "https://github.com/ryanoasis/nerd-fonts/releases/download/${tag}/JetBrainsMono.zip" && \
+install-font "https://github.com/ryanoasis/nerd-fonts/releases/download/${tag}/IBMPlexMono.zip"
+```
+
+node:
+
+```sh
+nvm install --lts && \
+corepack enable
+```
+
+docker:
+
+```sh
+sudo systemctl enable --now docker && \
+sudo usermod -aG docker $USER && \
+newgrp docker
+```
+
+flatpaks:
+
+```sh
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && \
+flatpak install flathub com.microsoft.Edge # try aur's microsoft-edge-stable-bin first, if it doesn't break with the theme, use that
+```
+
+--8<-- "./docs/common/storage.md"
+
+--8<-- "./docs/common/gnome.md"

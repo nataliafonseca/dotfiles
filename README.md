@@ -4,8 +4,9 @@ Personal dotfiles repository for managing shell configuration, custom functions,
 
 ## Installation Guides
 
-- [Arch Linux](docs/arch.installations.md) - Complete setup for Arch Linux systems
-- [macOS](docs/mac.installations.md) - Setup instructions for macOS
+- [Arch Linux](docs/os/arch.md) - Complete setup for Arch Linux systems
+- [macOS](docs/os/mac.md) - Setup instructions for macOS
+- [Ubuntu](docs/os/ubuntu.md) - Setup instructions for macOS
 
 ## Features
 

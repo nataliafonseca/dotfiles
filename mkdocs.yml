@@ -36,5 +36,13 @@ markdown_extensions:
   - pymdownx.superfences
 
 nav:
-  - Arch Linux: "arch.installations.md"
-  - MacOS: "mac.installations.md"
+  - Overview: index.md
+  - Operating Systems:
+      - Arch Linux: os/arch.md
+      - macOS: os/mac.md
+      - Ubuntu: os/ubuntu.md
+  - Shared Guides:
+      - Bootstrap: common/bootstrap.md
+      - SSH: common/ssh.md
+      - Storage: common/storage.md
+      - GNOME: common/gnome.md
