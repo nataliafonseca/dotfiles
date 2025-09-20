@@ -1,7 +1,5 @@
 # MacOS
 
-My initial setup guide for MacOS
-
 ## Homebrew / XCode cli stuff / Rosetta
 
 ```sh
@@ -153,11 +151,13 @@ defaults write -g ApplePressAndHoldEnabled -bool false
 ```
 
 Swap `cmd` and `ctrl`:
+
 ```plain
 System settings -> Keyboard -> Keyboard Shortcuts -> Modifier Keys -> (Select keyboard on top) -> ctrl > cmd / cmd > ctrl
 ```
 
 Use default Function Keys:
+
 ```plain
 System settings -> Keyboard -> Keyboard Shortcuts -> Function Keys -> Use F1, F2, etc. keys as standard function keys
 ```

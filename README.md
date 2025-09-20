@@ -1,11 +1,11 @@
-# DOTFILES
+# Dotfiles
 
 Personal dotfiles repository for managing shell configuration, custom functions, and development environment setup across multiple operating systems.
 
 ## Installation Guides
 
-- [Arch Linux](arch.installations.md) - Complete setup for Arch Linux systems
-- [macOS](mac.installations.md) - Setup instructions for macOS
+- [Arch Linux](docs/arch.installations.md) - Complete setup for Arch Linux systems
+- [macOS](docs/mac.installations.md) - Setup instructions for macOS
 
 ## Features
 
