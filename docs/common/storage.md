@@ -48,9 +48,9 @@ sudo ufw allow samba # if this errors cause no ufw that's fine
 configuring services to wait until internet is on:
 
 ```sh
-sudo mkdir -p /etc/systemd/system/smb.service.d && \
-sudo mkdir -p /etc/systemd/system/nmb.service.d && \
-sudo cp $DOTDIR/docs/templates/smb-network-wait.conf /etc/systemd/system/smb.service.d/network-wait.conf && \
-sudo cp $DOTDIR/docs/templates/nmb-network-wait.conf /etc/systemd/system/nmb.service.d/network-wait.conf && \
+sudo mkdir -p /etc/systemd/system/smbd.service.d && \
+sudo mkdir -p /etc/systemd/system/nmbd.service.d && \
+sudo cp $DOTDIR/docs/templates/smb-network-wait.conf /etc/systemd/system/smbd.service.d/network-wait.conf && \
+sudo cp $DOTDIR/docs/templates/nmb-network-wait.conf /etc/systemd/system/nmbd.service.d/network-wait.conf && \
 sudo systemctl daemon-reload
 ```

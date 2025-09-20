@@ -9,8 +9,6 @@
 [core]
 	editor = code --wait
 	excludesFile = ~/.dot/git/.gitignore
-	autocrlf = input
-	safecrlf = true
 
 [rebase]
 	autoStash = true
