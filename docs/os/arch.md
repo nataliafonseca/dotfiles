@@ -12,7 +12,7 @@ yay -Syu --devel && \
 yay -Y --devel --save
 ```
 
---8<-- "./docs/common/bootstrap.md"
+--8<-- "./docs/common/dotfiles.md"
 
 --8<-- "./docs/common/ssh.md"
 
@@ -45,6 +45,11 @@ newgrp docker
 ```sh title="flatpaks"
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && \
 flatpak install flathub com.microsoft.Edge # try aur's microsoft-edge-stable-bin first, if it doesn't break with the theme, use that
+```
+
+```sh title="Tailscale"
+curl -fsSL https://tailscale.com/install.sh | sh && \
+sudo tailscale up --accept-routes
 ```
 
 --8<-- "./docs/common/storage.md"

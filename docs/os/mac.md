@@ -17,7 +17,7 @@ Essentials
 brew install --cask scroll-reverser rectangle iterm2 firefox 1password 1password-cli git gh bat exa micro jq
 ```
 
---8<-- "./docs/common/bootstrap.md"
+--8<-- "./docs/common/dotfiles.md"
 
 --8<-- "./docs/common/ssh.md"
 

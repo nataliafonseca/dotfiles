@@ -19,7 +19,7 @@ Personal dotfiles repository for managing shell configuration, custom functions,
 
 ## Structure
 
-```
+```plain
 ~/.dot/
 ├── zsh/                          # ZSH configuration
 │   ├── .zshenv                   # Environment variables and OS detection

@@ -41,7 +41,7 @@ sudo smbpasswd -a $USER
 enabling the services and allowing if firewall ufw:
 
 ```sh
-sudo systemctl enable --now smb nmb && \
+sudo systemctl enable --now smbd nmbd && \
 sudo ufw allow samba # if this errors cause no ufw that's fine
 ```
 

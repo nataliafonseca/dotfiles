@@ -2,6 +2,7 @@ site_name: Dotfiles
 site_url: https://docs.wwwsnow.org
 repo_url: https://github.com/nataliafonseca/dotfiles
 repo_name: nataliafonseca/dotfiles
+
 theme:
   name: material
   icon:
@@ -9,36 +10,29 @@ theme:
   font:
     code: JetBrains Mono
   palette:
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: deep-purple
-      accent: deep-purple
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: black
-      accent: indigo
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
+    primary: deep purple
+    accent: deep purple
   features:
     - content.code.copy
     - content.code.annotate
     - content.tabs.link
+
 markdown_extensions:
   - attr_list
   - md_in_html
+  - pymdownx.keys
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
 
 nav:
   - Overview: index.md
@@ -48,7 +42,8 @@ nav:
       - Ubuntu Server: os/ubuntu-server.md
       - Ubuntu: os/ubuntu.md
   - Shared Guides:
-      - Bootstrap: common/bootstrap.md
+      - Dotfiles: common/dotfiles.md
       - SSH: common/ssh.md
       - Storage: common/storage.md
       - GNOME: common/gnome.md
+      - rEFInd: common/refind.md
