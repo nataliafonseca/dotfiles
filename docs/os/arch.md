@@ -18,39 +18,31 @@ yay -Y --devel --save
 
 ## Installations
 
-installing packages:
-
-```sh
+```sh title="arch repo and aur"
 yay -S --needed --noconfirm github-cli direnv nvm docker docker-compose uv code gnome-terminal flatpak firefox zen-browser-bin snipaste claude-code gemini-cli sublime-text-4 fastfetch gnome-browser-connector gtk-engine-murrine dnsutils jq && \
 sudo pacman -R gnome-console
 ```
 
-nerd fonts:
-
-```sh
+```sh title="nerd fonts"
 tag=$(curl -fsSL https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | jq -r '.tag_name') && \
 install-font "https://github.com/ryanoasis/nerd-fonts/releases/download/${tag}/JetBrainsMono.zip" && \
 install-font "https://github.com/ryanoasis/nerd-fonts/releases/download/${tag}/IBMPlexMono.zip"
 ```
 
-node:
-
-```sh
-nvm install --lts && \
+```sh title="node"
+nvm install 'lts/*' && \
+nvm use 'lts/*' && \
+nvm alias default 'lts/*' && \
 corepack enable
 ```
 
-docker:
-
-```sh
+```sh title="docker"
 sudo systemctl enable --now docker && \
 sudo usermod -aG docker $USER && \
 newgrp docker
 ```
 
-flatpaks:
-
-```sh
+```sh title="flatpaks"
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && \
 flatpak install flathub com.microsoft.Edge # try aur's microsoft-edge-stable-bin first, if it doesn't break with the theme, use that
 ```

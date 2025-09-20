@@ -18,13 +18,17 @@ alias -g ......='../../../../..'
 alias la='ls -laa'
 alias ldot='ls -ld .*'
 if (( $+commands[eza] )); then
-    alias ls="eza -lh --icons --time-style=long-iso --group-directories-first --sort=name --sort=ext"
-    alias tree="eza --icons --tree"
-    alias ll="eza -la --icons --time-style=long-iso --group-directories-first"
+  alias ls="eza -lh --icons --time-style=long-iso --group-directories-first --sort=name --sort=ext"
+  alias tree="eza --icons --tree"
+  alias ll="eza -la --icons --time-style=long-iso --group-directories-first"
 fi
 
 # Enhanced file viewing (bat preferred over cat)
-(( $+commands[bat] )) && alias cat="bat --style=plain"
+if (( $+commands[bat] )); then
+  alias cat="bat --style=plain"
+elif (( $+commands[batcat] )); then
+  alias cat="batcat --style=plain"
+fi
 
 # Common typo fixes
 alias quit='exit'

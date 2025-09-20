@@ -23,13 +23,17 @@ brew install --cask scroll-reverser rectangle iterm2 firefox 1password 1password
 
 ## NVM and Node
 
-```sh
-curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/$(curl -fsSL https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r '.tag_name')/install.sh" | bash
-nvm install node
+```sh title="node pt. 1"
+curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/$(curl -fsSL https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r '.tag_name')/install.sh" | bash && \
+export NVM_DIR="$HOME/.config/nvm" && \
+reload # shell need to reload to see nvm and create symlinks if needed
+```
+
+```sh title="node pt. 2"
+nvm install 'lts/*' && \
+nvm use 'lts/*' && \
+nvm alias default 'lts/*' && \
 corepack enable
-nvm install 'lts/*'
-corepack enable
-nvm alias default 'lts/*'
 ```
 
 ## Fonts

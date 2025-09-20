@@ -6,6 +6,7 @@ Personal dotfiles repository for managing shell configuration, custom functions,
 
 - [Arch Linux](os/arch.md) - Complete setup for Arch Linux systems
 - [macOS](os/mac.md) - Setup instructions for macOS
+- [Ubuntu Server](os/ubuntu-server.md) - Setup notes for Ubuntu Server
 - [Ubuntu](os/ubuntu.md) - Setup notes for Ubuntu
 
 ## Features

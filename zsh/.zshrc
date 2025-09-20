@@ -47,3 +47,6 @@ source $ZDOTDIR/.zaliases
 bindkey  "^[[H"   beginning-of-line     # home key
 bindkey  "^[[F"   end-of-line           # end key
 bindkey  "\^U"    backward-kill-line    # ctrl+u
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

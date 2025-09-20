@@ -6,9 +6,6 @@ theme:
   name: material
   icon:
     repo: fontawesome/brands/github
-  features:
-    - content.code.copy
-    - content.code.annotate
   font:
     code: JetBrains Mono
   palette:
@@ -26,7 +23,13 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+  features:
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
 markdown_extensions:
+  - attr_list
+  - md_in_html
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
@@ -34,12 +37,15 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
 
 nav:
   - Overview: index.md
   - Operating Systems:
       - Arch Linux: os/arch.md
       - macOS: os/mac.md
+      - Ubuntu Server: os/ubuntu-server.md
       - Ubuntu: os/ubuntu.md
   - Shared Guides:
       - Bootstrap: common/bootstrap.md
