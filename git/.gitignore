@@ -47,3 +47,4 @@ config.local.*
 # AI and development tools
 .claude/
 .cursor/
+.serena/

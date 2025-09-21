@@ -1,8 +1,9 @@
-.antidote
+!.vscode/
+zsh/plugins/karabiner/config/automatic_backups/
+zsh/plugins/work/
+.antidote/
 .zplugins.zsh
 .zsh_sessions
 .env
 .zcompdump
 .zsh_history
-zsh/plugins/karabiner/config/automatic_backups/
-zsh/plugins/work
