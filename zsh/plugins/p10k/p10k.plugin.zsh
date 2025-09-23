@@ -7,6 +7,6 @@ POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
 ZLE_RPROMPT_INDENT=0
 
-if ! is_mac; then
-    typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='󰌽'
-fi
+# if ! is_mac; then
+#     typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='󰌽'
+# fi
