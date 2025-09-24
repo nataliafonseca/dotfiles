@@ -31,20 +31,11 @@ if (( ! $+commands[direnv] )); then
         brew install direnv
     elif is_arch; then
         sudo pacman -S --needed --noconfirm direnv
-    elif is_deb; then
-        sudo apt-get update && sudo apt-get install -y direnv
-    elif is_fedora; then
-        sudo dnf install -y direnv
     else
+        bin_path=$HOME/.local/bin
         echo "Installing direnv via official installer..."
         curl -sfL https://direnv.net/install.sh | bash
-    fi
-
-    if (( $+commands[direnv] )); then
-        echo "✓ direnv installed successfully"
-    else
-        echo "✗ direnv installation failed" >&2
-        return 1
+        unset bin_path
     fi
 fi
 
