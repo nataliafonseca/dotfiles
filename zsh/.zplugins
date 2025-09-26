@@ -6,6 +6,7 @@ $ZDOTDIR/plugins/karabiner conditional:is_mac
 $ZDOTDIR/plugins/work conditional:is_work
 $ZDOTDIR/plugins/pacman conditional:is_arch
 $ZDOTDIR/plugins/alacritty
+$ZDOTDIR/plugins/tmux
 $ZDOTDIR/plugins/python
 $ZDOTDIR/plugins/docker
 $ZDOTDIR/plugins/nvm
