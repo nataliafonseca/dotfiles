@@ -5,8 +5,14 @@
 with the correct setup configured:
 
 ```sh
-sudo cp ~/.config/monitors.xml ~gdm/.config/ && \
+sudo cp ~/.config/monitors.xml ~gdm/.config/monitors.xml && \
 sudo chown gdm:gdm ~gdm/.config/monitors.xml
+```
+
+if this results in `cp: cannot create regular file '~gdm/.config/': No such file or directory` or `chown: invalid user: ‘gdm:gdm’`, that means gdm is version 49 or above, in which case the correct command is:
+
+```sh
+sudo cp ~/.config/monitors.xml /etc/xdg/monitors.xml
 ```
 
 ### Eurkeys

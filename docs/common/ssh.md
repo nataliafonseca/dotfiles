@@ -7,6 +7,14 @@ ssh-keygen -t ed25519 # or retrieve id_ed25519 and id_ed25519.pub and place in $
 cat ~/.ssh/id_ed25519.pub # add to github if not there already
 ```
 
+to get from 1password:
+
+```sh
+# needs to be authenticated! `op account add` + `eval $(op signin)` 
+op read op://Personal/<1p_item_title>/private_key | tr -dc '[:alnum:]+/=\n -' > ~/.ssh/id_ed25519 && \
+op read op://Personal/<1p_item_title>/public_key | tr -dc '[:alnum:]+/=\n -' > ~/.ssh/id_ed25519.pub
+```
+
 getting authorized_keys and fixing any permissions:
 
 ```sh

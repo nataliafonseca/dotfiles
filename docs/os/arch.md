@@ -3,7 +3,7 @@
 ## Initial requirements
 
 ```sh
-sudo pacman -S --needed --noconfirm git base-devel curl zsh bat eza micro fzf imagemagick xclip samba ntfs-3g less && \
+sudo pacman -S --needed --noconfirm git base-devel curl wget zsh bat eza micro fzf imagemagick xclip samba ntfs-3g less && \
 git clone https://aur.archlinux.org/yay.git && \
 cd yay && makepkg -si && \
 cd .. && rm -rf yay && \
@@ -18,9 +18,12 @@ yay -Y --devel --save
 
 ## Installations
 
-```sh title="arch repo and aur"
-yay -S --needed --noconfirm github-cli direnv nvm docker docker-compose uv code gnome-terminal flatpak firefox zen-browser-bin snipaste claude-code gemini-cli sublime-text-4 fastfetch gnome-browser-connector gtk-engine-murrine dnsutils jq && \
-sudo pacman -R gnome-console
+```sh title="official repos"
+sudo pacman -S --needed --noconfirm github-cli direnv nvm docker docker-compose uv flatpak firefox fastfetch gnome-tweaks gnome-browser-connector gtk-engine-murrine dnsutils jq refind
+```
+
+```sh title="AUR"
+yay -S --needed --noconfirm visual-studio-code-bin snipaste claude-code opcode-bin gemini-cli-bin openai-codex-bin sublime-text-4 1password 1password-cli upnote-appimage telegram-desktop-bin zapzap
 ```
 
 ```sh title="nerd fonts"
@@ -43,13 +46,8 @@ newgrp docker
 ```
 
 ```sh title="flatpaks"
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && \
-flatpak install flathub com.microsoft.Edge # try aur's microsoft-edge-stable-bin first, if it doesn't break with the theme, use that
-```
-
-```sh title="Tailscale"
-curl -fsSL https://tailscale.com/install.sh | sh && \
-sudo tailscale up --accept-routes
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && \
+sudo flatpak install flathub com.microsoft.Edge # try aur's microsoft-edge-stable-bin first, if it doesn't break with the theme, use that
 ```
 
 --8<-- "./docs/common/storage.md"
