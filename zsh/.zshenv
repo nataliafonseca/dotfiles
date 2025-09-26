@@ -35,6 +35,7 @@ export EDITOR=code
 
 # Conditionals
 function is_mac() { [[ "$OSTYPE" == "darwin"* ]] }
+function is_linux() { [[ ! "$OSTYPE" == "darwin"* ]] }
 function is_pc() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"pc"* ]] }
 function is_homelab() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"homelab"* ]] }
 function is_cloud() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"cloud"* ]] }
