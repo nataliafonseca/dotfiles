@@ -19,7 +19,7 @@ yay -Y --devel --save
 ## Installations
 
 ```sh title="official repos"
-sudo pacman -S --needed --noconfirm github-cli direnv nvm docker docker-compose uv flatpak firefox fastfetch gnome-tweaks gnome-browser-connector gtk-engine-murrine dnsutils jq refind
+sudo pacman -S --needed --noconfirm github-cli direnv nvm docker docker-compose uv flatpak firefox fastfetch gnome-tweaks gnome-browser-connector gtk-engine-murrine dnsutils jq refind unzip
 ```
 
 ```sh title="AUR"

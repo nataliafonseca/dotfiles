@@ -1,5 +1,7 @@
 # ~/.zshenv should only be a one-liner that sources this file
 # echo ". ~/.dot/zsh/.zshenv" > ~/.zshenv
+# echo "source=~/.dot/hypr/hyprland.conf" > ~/.config/hypr/hyprland.conf
+# echo "include ~/.dot/kitty/kitty.conf" > ~/.config/kitty/kitty.conf 
 
 export DOTDIR=~/.dot
 export ZDOTDIR=$DOTDIR/zsh
