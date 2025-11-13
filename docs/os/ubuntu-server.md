@@ -7,7 +7,7 @@ sudo add-apt-repository ppa:git-core/ppa && \
 sudo apt update && \
 sudo apt upgrade -y && \
 sudo apt install -y git build-essential curl zsh bat \
-eza micro fzf imagemagick samba apt-transport-https
+eza jq micro fzf imagemagick samba apt-transport-https
 ```
 
 --8<-- "./docs/common/dotfiles.md"

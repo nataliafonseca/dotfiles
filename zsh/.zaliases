@@ -30,6 +30,10 @@ elif (( $+commands[batcat] )); then
   alias cat="batcat --style=plain"
 fi
 
+if (( $+commands[kitten] )); then
+  alias ssh="kitten ssh"
+fi
+
 # Common typo fixes
 alias quit='exit'
 alias cd..='cd ..'

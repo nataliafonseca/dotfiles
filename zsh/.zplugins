@@ -12,7 +12,6 @@ $ZDOTDIR/plugins/speedtest
 $ZDOTDIR/plugins/bun
 $ZDOTDIR/plugins/go
 $ZDOTDIR/plugins/direnv
-$ZDOTDIR/plugins/claude
 
 romkatv/powerlevel10k
 $ZDOTDIR/plugins/p10k
