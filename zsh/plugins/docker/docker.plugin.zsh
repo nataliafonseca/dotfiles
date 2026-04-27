@@ -30,3 +30,17 @@ if [[ -d "$HOME/.docker/completions" ]]; then
     autoload -Uz compinit
     compinit
 fi
+
+# Run docker sandbox
+function sb() {
+    if [[ -z "$1" ]]; then
+        echo "Usage: sb <sandbox_name_or_agent_name>"
+        echo "Existing sandboxes:"
+        docker sandbox list
+        return 1
+    fi
+
+    export GITHUB_TOKEN=$(gh auth token 2>/dev/null)
+    export GH_TOKEN=$(gh auth token 2>/dev/null)
+    docker sandbox run "$1" .
+}

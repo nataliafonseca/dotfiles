@@ -45,6 +45,13 @@ config.local.*
 .cache/
 
 # AI and development tools
+.sbx
 .claude/
 .cursor/
 .serena/
+.copilot/
+.copilot-share/
+copilot-instructions.md
+AGENTS.md
+GEMINI.md
+CLAUDE.md
