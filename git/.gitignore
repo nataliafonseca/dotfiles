@@ -43,6 +43,7 @@ config.local.*
 *.tmp
 *.temp
 .cache/
+.local/
 
 # AI and development tools
 .sbx
