@@ -14,21 +14,22 @@ autoload -Uz $ZDOTDIR/functions/autoload-dir
 autoload-dir $ZDOTDIR/functions
 
 # load antidote/plugins
+## antidote options
 zstyle ':antidote:bundle' use-friendly-names 'yes'
 zstyle ':antidote:bundle' file $ZDOTDIR/.zplugins
 
-# clone antidot if not found
+## clone antidote if not found
 [[ -e $ZDOTDIR/.antidote ]] || git clone --depth=1 https://github.com/mattmc3/antidote.git $ZDOTDIR/.antidote
 
-# create plugin files if not found
+## create plugin files if not found
 zsh_plugins=${ZDOTDIR:-~}/.zplugins.zsh
 [[ -f ${zsh_plugins:r} ]] || touch ${zsh_plugins:r}
 
-# load functions
+## load functions
 fpath+=($ZDOTDIR/.antidote/functions)
 autoload -Uz $fpath[-1]/antidote
 
-# update plugins file if text file changes
+## update plugins file if text file changes
 if [[ ! $zsh_plugins -nt ${zsh_plugins:r} ]] || [[ ! -s $zsh_plugins ]]; then
 
   (( $+commands[envsubst] )) || envsubst() { python3 -c 'import os,sys;[sys.stdout.write(os.path.expandvars(l)) for l in sys.stdin]' }
@@ -37,7 +38,7 @@ if [[ ! $zsh_plugins -nt ${zsh_plugins:r} ]] || [[ ! -s $zsh_plugins ]]; then
   (envsubst <${zsh_plugins:r} | antidote bundle >|$zsh_plugins)
 fi
 
-# load plugins
+## load plugins
 source $zsh_plugins
 
 # load aliases

@@ -1,4 +1,3 @@
-# Global aliases and shell shortcuts
 # Configuration shortcuts
 alias reload='exec $SHELL'
 alias dotconfig="$EDITOR $DOTDIR"

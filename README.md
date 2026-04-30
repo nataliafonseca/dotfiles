@@ -6,7 +6,8 @@ Personal dotfiles repository for managing shell configuration, custom functions,
 
 - [Arch Linux](docs/os/arch.md) - Complete setup for Arch Linux systems
 - [macOS](docs/os/mac.md) - Setup instructions for macOS
-- [Ubuntu](docs/os/ubuntu.md) - Setup instructions for macOS
+- [Ubuntu](docs/os/ubuntu.md) - Setup instructions for Ubuntu
+- [Ubuntu Server](docs/os/ubuntu-server.md) - Setup instructions for Ubuntu Server
 
 ## Features
 
@@ -26,7 +27,7 @@ Personal dotfiles repository for managing shell configuration, custom functions,
 │   ├── .zshrc                    # Main ZSH configuration
 │   ├── .zaliases                 # Shell aliases and shortcuts
 │   ├── .zplugins                 # Plugin manifest for antidote
-│   ├── functions/                # Custom ZSH functions (autoloaded)
+│   ├── functions/                # Custom ZSH functions
 │   └── plugins/                  # Custom plugin modules
 ├── git/                          # Git configuration
 └── docs/                         # Installation documentation
