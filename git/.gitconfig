@@ -52,7 +52,7 @@
 	smudge = sops decrypt --filename-override %f /dev/stdin
 	required = true
 [diff "sops"]
-	textconv = sops decrypt
+	textconv = sh -c 'sops decrypt \"$1\" 2>/dev/null || cat \"$1\"' -
 
 [includeIf "gitdir:Nutrien/"]
 	path = ~/.dot/git/.nutrien.gitconfig

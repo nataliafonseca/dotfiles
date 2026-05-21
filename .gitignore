@@ -5,5 +5,5 @@ zsh/plugins/work/
 .zplugins.zsh
 .zsh_sessions
 .env
-.zcompdump
+.zcompdump*
 .zsh_history

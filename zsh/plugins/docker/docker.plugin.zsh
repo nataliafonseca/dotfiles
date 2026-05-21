@@ -10,6 +10,7 @@
 alias docker:prune="docker system prune --all --volumes"
 alias docker:stop="docker stop \$(docker ps -q)"
 alias docker:rm="docker rm \$(docker ps -aq)"
+alias dc="docker compose"
 
 # Interactive shell in container
 function dsh() {
