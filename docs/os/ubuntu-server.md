@@ -24,6 +24,14 @@ sudo usermod -aG docker $USER && \
 newgrp docker &&
 ```
 
+```sh title="sops"
+SOPS_VERSION=$(curl -fsSL https://api.github.com/repos/getsops/sops/releases/latest | jq -r '.tag_name')
+curl -LO https://github.com/getsops/sops/releases/download/$SOPS_VERSION/sops-$SOPS_VERSION.linux.arm64 # or .amd64
+sudo mv sops-$SOPS_VERSION.linux.arm64 /usr/local/bin/sops
+sudo chmod +x /usr/local/bin/sops
+sudo apt install age
+```
+
 ```sh title="github cli"
 (type -p wget >/dev/null || (sudo apt update && sudo apt install wget -y)) \
  && sudo mkdir -p -m 755 /etc/apt/keyrings \

@@ -34,9 +34,9 @@ build/
 *.egg-info/
 
 # Environment and configuration files
-.env*
-!.env*.example
-config.local.*
+# .env*
+# !.env*.example
+# config.local.*
 
 # Logs and temporary files
 *.log

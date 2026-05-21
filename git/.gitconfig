@@ -47,6 +47,12 @@
 	count = !git shortlog -s --grep
 	stats = shortlog -sn
 
+[filter "sops"]
+	clean = sops encrypt --filename-override %f /dev/stdin
+	smudge = sops decrypt --filename-override %f /dev/stdin
+	required = true
+[diff "sops"]
+	textconv = sops decrypt
+
 [includeIf "gitdir:Nutrien/"]
 	path = ~/.dot/git/.nutrien.gitconfig
-
