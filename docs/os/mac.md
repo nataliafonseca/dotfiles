@@ -8,13 +8,13 @@ Homebrew / XCode cli / Rosetta
 xcode-select --install
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 eval $(/opt/homebrew/bin/brew shellenv)
-sudo softwareupdate --install-rosetta
+# sudo softwareupdate --install-rosetta
 ```
 
 Essentials
 
 ```sh
-brew install --cask scroll-reverser rectangle iterm2 firefox 1password 1password-cli git gh bat exa micro jq
+brew install --cask scroll-reverser rectangle iterm2 google-chrome 1password 1password-cli git gh bat exa micro jq
 ```
 
 --8<-- "./docs/common/dotfiles.md"
@@ -60,7 +60,7 @@ homebrew:
 
 ```sh
 brew install cocoapods watchman wget imagemagick graphicsmagick mas
-brew install --cask beekeeper-studio insomnia obsidian bartender cleanshot discord iina imageoptim notion qbittorrent telegram google-chrome sublime-text alt-tab
+brew install --cask cleanshot discord qbittorrent telegram sublime-text alt-tab thaw
 ```
 
 appstore:
@@ -78,8 +78,6 @@ appstore:
 - LanguageTool
 - Presentify
 - The Unarchiver
-- LimeChat
-- NordVPN
 
 ## Configs and instructions
 
