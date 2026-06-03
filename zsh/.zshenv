@@ -27,6 +27,7 @@ done
 # Add common path locations
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.android/platform-tools
 
 # XCompose
 export QT_IM_MODULE=ibus

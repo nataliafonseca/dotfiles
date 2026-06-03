@@ -1,18 +1,15 @@
 $ZDOTDIR/plugins/homebrew conditional:is_mac
+$ZDOTDIR/plugins/iterm conditional:is_mac
 
 ### ^^^
 
 $ZDOTDIR/plugins/work conditional:is_work
 $ZDOTDIR/plugins/pacman conditional:is_arch
 $ZDOTDIR/plugins/docker
-$ZDOTDIR/plugins/nvm
 $ZDOTDIR/plugins/pnpm
-#$ZDOTDIR/plugins/bun
-#$ZDOTDIR/plugins/go
-#$ZDOTDIR/plugins/direnv
-
-romkatv/powerlevel10k
-$ZDOTDIR/plugins/p10k
+$ZDOTDIR/plugins/bun
+$ZDOTDIR/plugins/go
+$ZDOTDIR/plugins/direnv
 
 ### ^^^
 
@@ -22,3 +19,8 @@ zsh-users/zsh-autosuggestions
 zdharma-continuum/fast-syntax-highlighting
 zsh-users/zsh-history-substring-search
 $ZDOTDIR/plugins/subsearch
+
+### ^^^^
+
+romkatv/powerlevel10k
+$ZDOTDIR/plugins/p10k

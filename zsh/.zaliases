@@ -3,18 +3,16 @@ alias reload='exec $SHELL'
 alias dotconfig="$EDITOR $DOTDIR"
 
 # Global directory navigation aliases
-alias -g ...='../..'
-alias -g ....='../../..'
-alias -g .....='../../../..'
-alias -g ......='../../../../..'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 
 # Enhanced file listing (eza preferred over ls)
-alias la='ls -laa'
+alias la='ls -la'
 alias ldot='ls -ld .*'
 if (( $+commands[eza] )); then
   alias ls="eza -lh --icons --time-style=long-iso --group-directories-first --sort=name --sort=ext"
   alias tree="eza --icons --tree"
-  alias ll="eza -la --icons --time-style=long-iso --group-directories-first"
 fi
 
 # Enhanced file viewing (bat preferred over cat)
@@ -23,20 +21,6 @@ if (( $+commands[bat] )); then
 elif (( $+commands[batcat] )); then
   alias cat="batcat --style=plain"
 fi
-
-if (( $+commands[kitten] )); then
-  alias ssh="kitten ssh"
-fi
-
-# Common typo fixes
-alias quit='exit'
-alias cd..='cd ..'
-alias claer='clear'
-alias grpe='grep'
-
-# Archive utilities
-alias tarls="tar -tvf"
-alias untar="tar -xf"
 
 # Date/time utilities
 alias timestamp="date '+%Y-%m-%d %H:%M:%S'"

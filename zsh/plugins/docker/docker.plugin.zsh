@@ -26,8 +26,9 @@ function dsh() {
 }
 
 # Enable Docker CLI completions if available
-if [[ -d "$HOME/.docker/completions" ]]; then
-    fpath=($HOME/.docker/completions $fpath)
+0=${(%):-%x}
+if [[ -d "${0:A:h}/completions" ]]; then
+    FPATH="${0:A:h}/completions:$FPATH"
     autoload -Uz compinit
     compinit
 fi

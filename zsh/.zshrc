@@ -27,7 +27,7 @@ zstyle ':antidote:bundle' file $ZDOTDIR/.zplugins
 zsh_plugins=${ZDOTDIR:-~}/.zplugins.zsh
 [[ -f ${zsh_plugins:r} ]] || touch ${zsh_plugins:r}
 
-## load functions
+## load antidote functions
 fpath+=($ZDOTDIR/.antidote/functions)
 autoload -Uz $fpath[-1]/antidote
 
@@ -40,9 +40,6 @@ if [[ ! $zsh_plugins -nt ${zsh_plugins:r} ]] || [[ ! -s $zsh_plugins ]]; then
   (envsubst <${zsh_plugins:r} | antidote bundle >|$zsh_plugins)
 fi
 
-## load plugins
-source $zsh_plugins
-
 # load aliases
 source $ZDOTDIR/.zaliases
 
@@ -52,9 +49,11 @@ bindkey  "^[[F"   end-of-line           # end key
 bindkey  "\^U"    backward-kill-line    # ctrl+u
 bindkey '^[[3~' delete-char             # delete
 
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+## load plugins - keep at the end as some plugins like to go last
+source $zsh_plugins
 
-# To customize prompt, run `p10k configure` or edit ~/.dot/zsh/plugins/p10k/p10k.theme.zsh.
-[[ ! -f ~/.dot/zsh/plugins/p10k/p10k.theme.zsh ]] || source ~/.dot/zsh/plugins/p10k/p10k.theme.zsh
+# fnm
+FNM_PATH="/opt/homebrew/opt/fnm/bin"
+if [ -d "$FNM_PATH" ]; then
+  eval "$(fnm env --shell zsh)"
+fi
