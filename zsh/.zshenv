@@ -1,7 +1,5 @@
 # ~/.zshenv should only be a one-liner that sources this file
 # echo ". ~/.dot/zsh/.zshenv" > ~/.zshenv
-# mkdir -p ~/.config/hypr && echo "source=~/.dot/hypr/hyprland.conf" > ~/.config/hypr/hyprland.conf
-# mkdir -p ~/.config/kitty && echo "include ~/.dot/kitty/kitty.conf" > ~/.config/kitty/kitty.conf 
 
 export DOTDIR=~/.dot
 export ZDOTDIR=$DOTDIR/zsh
@@ -37,12 +35,14 @@ export XCOMPOSEFILE=$DOTDIR/.XCompose
 # Editor
 export EDITOR=code
 
+# Terminal
+export TERM=xterm-256color
+
 # Conditionals
 function is_mac() { [[ "$OSTYPE" == "darwin"* ]] }
 function is_linux() { [[ ! "$OSTYPE" == "darwin"* ]] }
 function is_pc() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"pc"* ]] }
 function is_homelab() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"homelab"* ]] }
-function is_cloud() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"cloud"* ]] }
 
 function is_deb() { (( $+commands[apt] )) }
 function is_arch() { (( $+commands[pacman] )) }
@@ -50,3 +50,5 @@ function is_fedora() { (( $+commands[dnf] )) }
 function is_wayland() { [[ $XDG_SESSION_TYPE == "wayland" ]] }
 
 function is_work() { [[ "$WORK_PC" == "true" ]] }
+function is_hetzner() { [[ "$HETZNER_VM" == "true" ]] }
+function is_racknerd() { [[ "$RACKNERD_VM" == "true" ]] }

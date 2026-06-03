@@ -7,7 +7,7 @@ sudo add-apt-repository ppa:git-core/ppa && \
 sudo apt update && \
 sudo apt upgrade -y && \
 sudo apt install -y git build-essential curl zsh bat \
-eza jq micro fzf imagemagick samba apt-transport-https
+eza jq micro fzf unzip apt-transport-https
 ```
 
 --8<-- "./docs/common/dotfiles.md"
@@ -18,10 +18,15 @@ eza jq micro fzf imagemagick samba apt-transport-https
 
 ## Installations
 
+```sh title="codex"
+sh -c 'curl -fsSL https://chatgpt.com/codex/install.sh | CODEX_NON_INTERACTIVE=1 sh'
+sudo apt install bubblewrap
+```
+
 ```sh title="docker"
-curl -fsSL https://get.docker.com | bash && \
-sudo usermod -aG docker $USER && \
-newgrp docker &&
+curl -fsSL https://get.docker.com | bash
+sudo usermod -aG docker $USER
+newgrp docker
 ```
 
 ```sh title="sops"
@@ -61,14 +66,14 @@ curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
 node:
 
 ```sh title="node pt. 1 - installing nvm"
-curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/$(curl -fsSL https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r '.tag_name')/install.sh" | bash && \
-export NVM_DIR="$HOME/.config/nvm" && \
+curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/$(curl -fsSL https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r '.tag_name')/install.sh" | bash
+export NVM_DIR="$HOME/.config/nvm"
 reload # shell need to reload to see nvm and create symlinks if needed
 ```
 
 ```sh title="node pt. 2 - installing node"
-nvm install 'lts/*' && \
-nvm use 'lts/*' && \
-nvm alias default 'lts/*' && \
+nvm install 'lts/*'
+nvm use 'lts/*'
+nvm alias default 'lts/*'
 corepack enable
 ```

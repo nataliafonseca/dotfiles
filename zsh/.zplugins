@@ -1,18 +1,15 @@
 $ZDOTDIR/plugins/homebrew conditional:is_mac
-$ZDOTDIR/plugins/karabiner conditional:is_mac
 
 ### ^^^
 
 $ZDOTDIR/plugins/work conditional:is_work
 $ZDOTDIR/plugins/pacman conditional:is_arch
-$ZDOTDIR/plugins/python
 $ZDOTDIR/plugins/docker
 $ZDOTDIR/plugins/nvm
-$ZDOTDIR/plugins/speedtest
-$ZDOTDIR/plugins/bun
 $ZDOTDIR/plugins/pnpm
-$ZDOTDIR/plugins/go
-$ZDOTDIR/plugins/direnv
+#$ZDOTDIR/plugins/bun
+#$ZDOTDIR/plugins/go
+#$ZDOTDIR/plugins/direnv
 
 romkatv/powerlevel10k
 $ZDOTDIR/plugins/p10k

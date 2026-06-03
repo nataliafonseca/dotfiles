@@ -1,17 +1,12 @@
 # Configuration shortcuts
 alias reload='exec $SHELL'
 alias dotconfig="$EDITOR $DOTDIR"
-alias zconfig="$EDITOR $ZDOTDIR"
 
 # Global directory navigation aliases
 alias -g ...='../..'
 alias -g ....='../../..'
 alias -g .....='../../../..'
 alias -g ......='../../../../..'
-
-# Development tools (conditional based on availability)
-(( $+commands[gh] )) && alias clone="gh repo clone"
-(( $+commands[vagrant] )) && alias vagrant="sudo vagrant"
 
 # Enhanced file listing (eza preferred over ls)
 alias la='ls -laa'
