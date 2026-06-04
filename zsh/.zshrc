@@ -5,11 +5,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# set zsh history variables.
-HISTFILE=$XDG_DATA_HOME/zsh/history
-[[ -d $HISTFILE:h ]] || mkdir -p $HISTFILE:h
-HISTSIZE=10000   # max history in session
-SAVEHIST=10000   # max entries in HISTFILE
+source $ZDOTDIR/.zshrc1
 
 # load functions
 autoload -Uz $ZDOTDIR/functions/autoload-dir
@@ -43,17 +39,5 @@ fi
 # load aliases
 source $ZDOTDIR/.zaliases
 
-# keybindings
-bindkey  "^[[H"   beginning-of-line     # home key
-bindkey  "^[[F"   end-of-line           # end key
-bindkey  "\^U"    backward-kill-line    # ctrl+u
-bindkey '^[[3~' delete-char             # delete
-
 ## load plugins - keep at the end as some plugins like to go last
 source $zsh_plugins
-
-# fnm
-FNM_PATH="/opt/homebrew/opt/fnm/bin"
-if [ -d "$FNM_PATH" ]; then
-  eval "$(fnm env --shell zsh)"
-fi

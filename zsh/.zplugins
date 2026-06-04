@@ -1,22 +1,19 @@
-$ZDOTDIR/plugins/homebrew conditional:is_mac
-$ZDOTDIR/plugins/iterm conditional:is_mac
+mattmc3/zephyr path:plugins/completion
 
 ### ^^^
 
 $ZDOTDIR/plugins/work conditional:is_work
-$ZDOTDIR/plugins/pacman conditional:is_arch
 $ZDOTDIR/plugins/docker
 $ZDOTDIR/plugins/pnpm
 $ZDOTDIR/plugins/bun
 $ZDOTDIR/plugins/go
 $ZDOTDIR/plugins/direnv
+$ZDOTDIR/plugins/zoxide
 
 ### ^^^
 
-mattmc3/zephyr path:plugins/completion
-$ZDOTDIR/plugins/zoxide
-zsh-users/zsh-autosuggestions
 zdharma-continuum/fast-syntax-highlighting
+zsh-users/zsh-autosuggestions
 zsh-users/zsh-history-substring-search
 $ZDOTDIR/plugins/subsearch
 

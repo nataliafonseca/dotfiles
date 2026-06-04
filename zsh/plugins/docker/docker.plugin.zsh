@@ -25,13 +25,8 @@ function dsh() {
     docker exec -it "$1" bash 2>/dev/null || docker exec -it "$1" sh
 }
 
-# Enable Docker CLI completions if available
-0=${(%):-%x}
-if [[ -d "${0:A:h}/completions" ]]; then
-    FPATH="${0:A:h}/completions:$FPATH"
-    autoload -Uz compinit
-    compinit
-fi
+# Enable Docker CLI completions
+fpath+="${0:A:h}/completions"
 
 # Run docker sandbox
 function sb() {

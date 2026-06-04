@@ -19,37 +19,12 @@ export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 export XDG_STATE_HOME=${XDG_STATE_HOME:-$HOME/.local/state}
 export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-$HOME/.xdg}
 
-# Ensure XDG dirs exist
-for xdgdir in XDG_{CONFIG,CACHE,DATA,STATE}_HOME XDG_RUNTIME_DIR; do
-  [[ -e ${(P)xdgdir} ]] || mkdir -p ${(P)xdgdir}
-done
-
-# Add common path locations
-export PATH=$PATH:/usr/local/bin
-export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:$HOME/.android/platform-tools
-
-# XCompose
-export QT_IM_MODULE=ibus
-export XCOMPOSEFILE=$DOTDIR/.XCompose
-
-# Editor
 export EDITOR=code
-
-# Terminal
 export TERM=xterm-256color
 
 # Conditionals
 function is_mac() { [[ "$OSTYPE" == "darwin"* ]] }
-function is_linux() { [[ ! "$OSTYPE" == "darwin"* ]] }
-function is_pc() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"pc"* ]] }
-function is_homelab() { (( $+commands[hostnamectl] )) && [[ $(hostnamectl) == *"homelab"* ]] }
-
-function is_deb() { (( $+commands[apt] )) }
-function is_arch() { (( $+commands[pacman] )) }
-function is_fedora() { (( $+commands[dnf] )) }
-function is_wayland() { [[ $XDG_SESSION_TYPE == "wayland" ]] }
-
 function is_work() { [[ "$WORK_PC" == "true" ]] }
+function is_homelab() { [[ "$HOMELAB" == "true" ]] }
 function is_hetzner() { [[ "$HETZNER_VM" == "true" ]] }
 function is_racknerd() { [[ "$RACKNERD_VM" == "true" ]] }

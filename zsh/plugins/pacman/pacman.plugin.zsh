@@ -9,6 +9,8 @@
 ##?   yay:sf         - Install AUR packages without confirmation
 ##?   yaur           - Interactive AUR package browser with preview
 
+if (( $+commands[pacman] )); then
+
 # Pacman aliases
 alias pacman:s="sudo pacman -S --needed"
 alias pacman:sf="sudo pacman -S --needed --noconfirm"
@@ -33,3 +35,5 @@ yaur() {
 
     yay -Slq | fzf -m --preview 'bat <(yay -Si {1} 2>/dev/null || echo "Package info not available") <(yay -Fl {1} 2>/dev/null | awk "{print \$2}" || echo "File list not available")' | xargs -ro yay -S
 }
+
+fi;
