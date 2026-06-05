@@ -4,6 +4,7 @@ mattmc3/zephyr path:plugins/completion
 
 $ZDOTDIR/plugins/work conditional:is_work
 $ZDOTDIR/plugins/docker
+$ZDOTDIR/plugins/fnm
 $ZDOTDIR/plugins/pnpm
 $ZDOTDIR/plugins/bun
 $ZDOTDIR/plugins/go

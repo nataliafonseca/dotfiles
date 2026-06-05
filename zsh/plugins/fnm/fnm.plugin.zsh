@@ -1,3 +1,4 @@
-if (( $+commands[fnm] )); then
+FNM_PATH=$(which fnm)
+if [ -d "$FNM_PATH" ]; then
   eval "$(fnm env --shell zsh)"
 fi
