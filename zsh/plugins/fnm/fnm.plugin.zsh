@@ -9,4 +9,5 @@ if [ -d "$FNM_PATH" ]; then
     export PATH="$PATH:$FNM_PATH"
   fi
   eval "$(fnm env --shell zsh)"
+  fpath+="${0:A:h}/completions"
 fi

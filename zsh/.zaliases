@@ -42,5 +42,5 @@ alias topcpu="ps auxf | sort -nr -k 3 | head -10"
 alias topmem="ps auxf | sort -nr -k 4 | head -10"
 
 # Password and secrets generation
-alias getsecret="openssl rand -base64 32"
+alias getsecret="openssl rand -hex 32"
 alias getpw="openssl rand -base64 32 | tr -dc 'a-zA-Z0-9' | head -c 32"
