@@ -22,6 +22,9 @@ export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-$HOME/.xdg}
 export EDITOR=code
 export TERM=xterm-256color
 
+# EOL
+export PROMPT_EOL_MARK=''
+
 # Conditionals
 function is_mac() { [[ "$OSTYPE" == "darwin"* ]] }
 function is_work() { [[ "$WORK_PC" == "true" ]] }
