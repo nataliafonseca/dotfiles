@@ -27,6 +27,7 @@ export PROMPT_EOL_MARK=''
 
 # Conditionals
 function is_mac() { [[ "$OSTYPE" == "darwin"* ]] }
+function is_arch() { (( $+commands[pacman] )) }
 function is_work() { [[ "$WORK_PC" == "true" ]] }
 function is_homelab() { [[ "$HOMELAB" == "true" ]] }
 function is_hetzner() { [[ "$HETZNER_VM" == "true" ]] }
