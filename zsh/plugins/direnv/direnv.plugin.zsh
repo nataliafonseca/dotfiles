@@ -21,6 +21,22 @@ else
     ln -s $plugin_config_dir $direnv_config_dir
 fi
 
+# Auto-install direnv if not available
+if (( ! $+commands[direnv] )); then
+    echo "direnv not found, installing..."
+
+    if is_mac; then
+        brew install direnv
+    elif is_arch; then
+        sudo pacman -S --needed --noconfirm direnv
+    else
+        bin_path=$HOME/.local/bin
+        echo "Installing direnv via official installer..."
+        curl -sfL https://direnv.net/install.sh | bash
+        unset bin_path
+    fi
+fi
+
 # Enable direnv hook for automatic environment loading
 if (( $+commands[direnv] )); then
     eval "$(direnv hook zsh)"

@@ -8,7 +8,6 @@ $ZDOTDIR/plugins/fnm
 $ZDOTDIR/plugins/pnpm
 $ZDOTDIR/plugins/bun
 $ZDOTDIR/plugins/go
-$ZDOTDIR/plugins/direnv
 $ZDOTDIR/plugins/zoxide
 
 ### ^^^
