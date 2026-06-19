@@ -6,3 +6,4 @@ bindkey '^[[B' history-substring-search-down
 bindkey '^[OB' history-substring-search-down
 
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+HISTORY_SUBSTRING_SEARCH_PREFIXED=1

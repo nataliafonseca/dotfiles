@@ -21,6 +21,7 @@ export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-$HOME/.xdg}
 
 export EDITOR=code
 export TERM=xterm-256color
+export ZSH_BINDKEY=emacs
 
 # EOL
 export PROMPT_EOL_MARK=''
